@@ -7,3 +7,5 @@
 //
 
 #import <Foundation/Foundation.h>
+
+extern void clu_userAgentDummy (void);
