@@ -1,12 +1,24 @@
 # references:
 # * http://www.objc.io/issue-6/travis-ci.html
 # * https://github.com/supermarin/xcpretty#usage
+# * http://docs.travis-ci.com/user/languages/objective-c/
 
 language: objective-c
 cache: cocoapods
 podfile: Example/Podfile
+matrix:
+    include:
+        - xcode_sdk: iphonesimulator
+        - xcode_sdk: iphonesimulator8.1
+#        - xcode_sdk: iphonesimulator7.1
+#        - xcode_sdk: iphonesimulator7.0
+#          xcode_scheme: CLUUserAgentTests-iOS
+#        - xcode_sdk: macosx
+#        - xcode_sdk: macosx10.10
+#        - xcode_sdk: macosx10.9
+#          xcode_scheme: CLUUserAgentTests-OSX
 before_install:
-- gem install cocoapods # Since Travis is not always on latest version
+- gem install cocoapods # Since Travis is not always on the latest version.
 - pod install --project-directory=Example
 install:
 - gem install xcpretty --no-rdoc --no-ri --no-document --quiet
