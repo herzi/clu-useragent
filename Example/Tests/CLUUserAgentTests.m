@@ -7,12 +7,13 @@
 //
 
 @import XCTest;
+@import CLUUserAgent;
 
-@interface Tests : XCTestCase
+@interface CLUUserAgentTests : XCTestCase
 
 @end
 
-@implementation Tests
+@implementation CLUUserAgentTests
 
 - (void)setUp
 {
@@ -28,7 +29,12 @@
 
 - (void)testExample
 {
-    XCTFail(@"No implementation for \"%s\"", __PRETTY_FUNCTION__);
+    // given
+    
+    // when
+    
+    // then
+    XCTAssertTrue(YES);
 }
 
 @end
