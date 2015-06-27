@@ -13,3 +13,6 @@ install:
 script:
 - set -o pipefail && xcodebuild test -workspace Example/CLUUserAgent.xcworkspace -scheme CLUUserAgent-Example -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO | xcpretty -c
 - pod lib lint --quick
+notifications:
+  email:
+    - sven.herzberg@cluepunk.com
