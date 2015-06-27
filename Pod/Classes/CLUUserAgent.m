@@ -16,12 +16,16 @@
 
 - (NSString*)defaultUserAgent
 {
-    NSString* prefix = @"CLUUserAgent_Example/0.1.0";
-    
-    NSArray* userAgent = @[prefix,
+    NSArray* userAgent = @[[self __productForApplication],
                            [self __productForCFNetwork],
                            [self __productForOS]];
+    
     return [userAgent componentsJoinedByString:@" "];
+}
+
+- (nonnull NSString*) __productForApplication
+{
+    return [self __productForBundle:[NSBundle mainBundle]];
 }
 
 - (nonnull NSString*) __productForBundle:(nonnull NSBundle*)bundle
