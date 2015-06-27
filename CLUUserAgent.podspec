@@ -21,12 +21,12 @@ Pod::Spec.new do |s|
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Sven Herzberg" => "sven.herzberg@cluepunk.com" }
-  s.source           = { :git => "https://github.com/herzi/clu-useragent.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/herzi/clu-useragent.git", :tag => 'v' + s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-#  s.platform     = :ios, '7.0'
+  s.platform     = :ios # remove when we start to support OSX
   s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.10'
+#  s.osx.deployment_target = '10.10'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
