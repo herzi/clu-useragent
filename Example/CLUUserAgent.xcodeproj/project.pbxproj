@@ -23,6 +23,7 @@
 		7371D616FC7E662B4F7529A4 /* Pods_CLUUserAgent_Tests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C982882C847FC180475670E3 /* Pods_CLUUserAgent_Tests.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
 		873B8AEB1B1F5CCA007FD442 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 873B8AEA1B1F5CCA007FD442 /* Main.storyboard */; };
 		C045031203D79FC0FDDC90F8 /* Pods_CLUUserAgent_Example.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A8ED54B5843D41B50159CC13 /* Pods_CLUUserAgent_Example.framework */; settings = {ATTRIBUTES = (Weak, ); }; };
+		CF4A7D541B3EC0E100CA1653 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF4A7D531B3EC0E100CA1653 /* CLUTestServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -65,6 +66,8 @@
 		A8ED54B5843D41B50159CC13 /* Pods_CLUUserAgent_Example.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLUUserAgent_Example.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C92ADBF0AE7547BF661B5C9E /* Pods-CLUUserAgent_Example.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-CLUUserAgent_Example.release.xcconfig"; path = "Pods/Target Support Files/Pods-CLUUserAgent_Example/Pods-CLUUserAgent_Example.release.xcconfig"; sourceTree = "<group>"; };
 		C982882C847FC180475670E3 /* Pods_CLUUserAgent_Tests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_CLUUserAgent_Tests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF4A7D521B3EC0E100CA1653 /* CLUTestServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUTestServer.h; sourceTree = "<group>"; };
+		CF4A7D531B3EC0E100CA1653 /* CLUTestServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUTestServer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -157,6 +160,8 @@
 			isa = PBXGroup;
 			children = (
 				6003F5BB195388D20070C39A /* CLUUserAgentTests.m */,
+				CF4A7D521B3EC0E100CA1653 /* CLUTestServer.h */,
+				CF4A7D531B3EC0E100CA1653 /* CLUTestServer.m */,
 				6003F5B6195388D20070C39A /* Supporting Files */,
 			);
 			path = Tests;
@@ -401,6 +406,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				6003F5BC195388D20070C39A /* CLUUserAgentTests.m in Sources */,
+				CF4A7D541B3EC0E100CA1653 /* CLUTestServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
