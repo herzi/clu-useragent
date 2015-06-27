@@ -1,9 +1,11 @@
 # CLUUserAgent
 
-[![CI Status](http://img.shields.io/travis/Sven Herzberg/CLUUserAgent.svg?style=flat)](https://travis-ci.org/Sven Herzberg/CLUUserAgent)
+[![CI Status](http://img.shields.io/travis/herzi/clu-useragent.svg?style=flat)](https://travis-ci.org/herzi/clu-useragent)
+<!--
 [![Version](https://img.shields.io/cocoapods/v/CLUUserAgent.svg?style=flat)](http://cocoapods.org/pods/CLUUserAgent)
 [![License](https://img.shields.io/cocoapods/l/CLUUserAgent.svg?style=flat)](http://cocoapods.org/pods/CLUUserAgent)
 [![Platform](https://img.shields.io/cocoapods/p/CLUUserAgent.svg?style=flat)](http://cocoapods.org/pods/CLUUserAgent)
+-->
 
 ## Usage
 
