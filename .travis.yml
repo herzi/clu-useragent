@@ -8,12 +8,10 @@ cache: cocoapods
 podfile: Example/Podfile
 matrix:
     include:
-        - xcode_sdk: iphonesimulator
         - xcode_sdk: iphonesimulator8.1
 #        - xcode_sdk: iphonesimulator7.1
 #        - xcode_sdk: iphonesimulator7.0
 #          xcode_scheme: CLUUserAgentTests-iOS
-#        - xcode_sdk: macosx
 #        - xcode_sdk: macosx10.10
 #        - xcode_sdk: macosx10.9
 #          xcode_scheme: CLUUserAgentTests-OSX
