@@ -10,21 +10,23 @@
 Pod::Spec.new do |s|
   s.name             = "CLUUserAgent"
   s.version          = "0.1.0"
-  s.summary          = "A short description of CLUUserAgent."
+  s.summary          = "Consistent User-Agent Strings for Cocoa"
   s.description      = <<-DESC
-                       An optional longer description of CLUUserAgent
+                       Provide consistent User-Agent strings for Cocoa apps:
 
-                       * Markdown format.
-                       * Don't worry about the indent, we strip it!
+                       * Reproduce the default User-Agent for iOS
+                       * Provide ways to customize it.
                        DESC
-  s.homepage         = "https://github.com/<GITHUB_USERNAME>/CLUUserAgent"
+  s.homepage         = "https://github.com/herzi/clu-useragent"
   # s.screenshots     = "www.example.com/screenshots_1", "www.example.com/screenshots_2"
   s.license          = 'MIT'
   s.author           = { "Sven Herzberg" => "sven.herzberg@cluepunk.com" }
-  s.source           = { :git => "https://github.com/<GITHUB_USERNAME>/CLUUserAgent.git", :tag => s.version.to_s }
+  s.source           = { :git => "https://github.com/herzi/clu-useragent.git", :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.platform     = :ios, '7.0'
+#  s.platform     = :ios, '7.0'
+  s.ios.deployment_target = '8.0'
+  s.osx.deployment_target = '10.10'
   s.requires_arc = true
 
   s.source_files = 'Pod/Classes/**/*'
