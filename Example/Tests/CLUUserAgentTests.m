@@ -30,11 +30,13 @@
 - (void)testExample
 {
     // given
+    CLUUserAgent* sut = [[CLUUserAgent alloc] init];
     
     // when
+    NSString* result = [sut defaultUserAgent];
     
     // then
-    XCTAssertTrue(YES);
+    XCTAssertEqualObjects(result, @"CLUUserAgent_Example/0.1.0 CFNetwork/711.3.18 Darwin/14.3.0");
 }
 
 @end
