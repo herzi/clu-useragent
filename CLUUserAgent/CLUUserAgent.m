@@ -25,20 +25,31 @@
 
 - (nonnull NSString*) stringValue
 {
-    NSArray* userAgent = @[[self __productForApplication],
-                           [self __productForCFNetwork],
-                           [self __productForOS]];
+    NSUInteger options = CLUUserAgentOptionsNone;
     
 #if TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR
-    userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
+    options |= CLUUserAgentOptionsAddOSArchitecture;
     
     NSProcessInfo* pi = [NSProcessInfo processInfo];
     NSOperatingSystemVersion osx = pi.operatingSystemVersion;
     if (osx.majorVersion < 10 || osx.minorVersion < 10) {
         // Starting with OSX 10.10, Apple dropped the model identifier.
-        userAgent = [userAgent arrayByAddingObject:[self __commentForModel]];
+        options |= CLUUserAgentOptionsAddDeviceModel;
     }
 #endif
+    
+    NSArray* userAgent = @[[self __productForApplication],
+                           [self __productForCFNetwork],
+                           [self __productForOS]];
+    
+    if (options & CLUUserAgentOptionsAddOSArchitecture) {
+        userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
+    }
+    
+    if (options & CLUUserAgentOptionsAddDeviceModel) {
+        userAgent = [userAgent arrayByAddingObject:[self __commentForModel]];
+    }
+    
     
     return [userAgent componentsJoinedByString:@" "];
 }
