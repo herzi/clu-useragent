@@ -29,3 +29,25 @@
 # define __nonnull
 # define __null_unspecified
 #endif
+
+#pragma mark Weak and Strong References
+
+/* When using blocks, you should avoid retain cycles. By using these macros,
+ * it's really easy to do so:
+ *
+ * […]
+ * CLU_WEAKEN(self); // capture a weak reference to self
+ * [self.worker performOpWithBlock:^(){
+ *     CLU_STRENGTHEN(self); // create a strong reference named self from the
+ *                           // weak reference above.
+ *     if (!self) {
+ *         return;           // self is gone, no need to continue
+ *     }
+ *
+ *     // From now on, you can use `self` as a strong reference.
+ *     […]
+ * }];
+ */
+
+#define CLU_WEAKEN(name)     typeof(name) __weak _clu_weak_##name = name; do {} while(0)
+#define CLU_STRENGTHEN(name) typeof(_clu_weak_##name) __strong name = _clu_weak_##name; do {} while(0)

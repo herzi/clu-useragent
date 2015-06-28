@@ -13,9 +13,6 @@
 @import Darwin.POSIX.netinet.in; // struct sockaddr_in6
 @import Darwin.POSIX.sys.socket; // socket()
 
-#define CLU_WEAK(name)   typeof(name) __weak _clu_weak_##name = name; do {} while(0)
-#define CLU_STRONG(name) typeof(_clu_weak_##name) __strong name = _clu_weak_##name; do {} while(0)
-
 // A simple wrapper around NSFileHandle implementing NSCopying
 @interface CLUTestServerSocket : NSObject<NSCopying>
 @property (nonnull) NSFileHandle* fileHandle;
@@ -192,9 +189,9 @@
     }
     
     NSNotificationCenter* nc = [NSNotificationCenter defaultCenter];
-    CLU_WEAK(self);
+    CLU_WEAKEN(self);
     self.v6Observer = [nc addObserverForName:NSFileHandleConnectionAcceptedNotification object:handle queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
-        CLU_STRONG(self);
+        CLU_STRENGTHEN(self);
         if (!self) {
             return;
         }
@@ -202,7 +199,7 @@
         [notification.object acceptConnectionInBackgroundAndNotify];
         NSFileHandle* connection = notification.userInfo[NSFileHandleNotificationFileHandleItem];
         id<NSObject> observer = [self.notificationCenter addObserverForName:NSFileHandleReadCompletionNotification object:connection queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
-            CLU_STRONG(self); // for NSAssert
+            CLU_STRENGTHEN(self); // for NSAssert
             NSString* d = [[NSString alloc] initWithData:notification.userInfo[NSFileHandleNotificationDataItem] encoding:NSUTF8StringEncoding];
             NSArray* lines = [d componentsSeparatedByString:@"\r\n"];
             

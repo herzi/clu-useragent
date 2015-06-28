@@ -8,7 +8,9 @@
 
 #import <CLUUserAgent/CLUUserAgent.h>
 
-@import Darwin.POSIX.sys.utsname;
+@import Darwin.POSIX.sys.utsname; // uname()
+
+#include <sys/sysctl.h>           // sysctlbyname()
 
 // HTTP 1.1 => Notational Conventions and Generic Grammar => Basic Rules => Token / Comment Token: http://www.w3.org/Protocols/rfc2616/rfc2616-sec2.html#sec2.2
 // HTTP 1.1 => Protocol Parameters => Product Token: http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.8
@@ -24,9 +26,34 @@
     
 #if TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR
     userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
+    
+    NSProcessInfo* pi = [NSProcessInfo processInfo];
+    NSOperatingSystemVersion osx = pi.operatingSystemVersion;
+    if (osx.majorVersion < 10 || osx.minorVersion < 10) {
+        // Starting with OSX 10.10, Apple dropped the model identifier.
+        userAgent = [userAgent arrayByAddingObject:[self __commentForModel]];
+    }
 #endif
     
     return [userAgent componentsJoinedByString:@" "];
+}
+
+- (nonnull NSString*) __commentForModel
+{
+    char modelBuffer[256];
+    size_t sz = sizeof(modelBuffer);
+    if (sysctlbyname("hw.model", modelBuffer, &sz, NULL, 0) < 0) {
+        perror("sysctlbyname(hw.model)");
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"implement" userInfo:nil];
+    }
+    if (sz >= sizeof(modelBuffer)) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"buffer too short" userInfo:nil];
+    }
+    modelBuffer[sz] = 0;
+    NSString* model = [NSString stringWithCString:modelBuffer encoding:NSASCIIStringEncoding];
+    model = [model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    model = [model stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
+    return [NSString stringWithFormat:@"(%@)", model];
 }
 
 - (nonnull NSString*) __commentForOSArch

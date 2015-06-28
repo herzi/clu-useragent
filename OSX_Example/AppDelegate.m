@@ -32,10 +32,16 @@
     }
     NSURLRequest* request = [NSURLRequest requestWithURL:url];
     NSURLSession* session = [NSURLSession sharedSession];
+    
+    CLU_WEAKEN(self);
     [[session dataTaskWithRequest:request completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
         NSString* reply = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        
         NSLog(@"reply: “%@”", reply);
+        
+        CLU_STRENGTHEN(self);
+        if (self) {
+            self.server = nil;
+        }
     }] resume];
 }
 
