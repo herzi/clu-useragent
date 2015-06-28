@@ -8,6 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
+#pragma mark Deprecation Qualifiers
+
+#define CLU_DEPRECATED __attribute__((__deprecated__))
+
 #pragma mark Nullability Qualifiers
 
 /* Nullability Qualifiers were Introduced with Swift 1.2, in Xcode 6.3.

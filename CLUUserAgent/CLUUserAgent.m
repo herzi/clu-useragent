@@ -16,14 +16,17 @@
 // HTTP 1.1 => Protocol Parameters => Product Token: http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.8
 // HTTP 1.1 => Headers => User-Agent: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
 
+@interface CLUUserAgent ()
+
+@property CLUUserAgentOptions options;
+
+@end
+
 @implementation CLUUserAgent
 
-- (nonnull NSString*) defaultUserAgent
-{
-    return [self stringValue];
-}
+#pragma mark: Life Cycle Management
 
-- (nonnull NSString*) stringValue
+- (instancetype) init
 {
     NSUInteger options = CLUUserAgentOptionsNone;
     
@@ -37,16 +40,35 @@
         options |= CLUUserAgentOptionsAddDeviceModel;
     }
 #endif
+
+    return [self initWithOptions:options];
+}
+
+- (instancetype) initWithOptions:(CLUUserAgentOptions)options
+{
+    self = [super init];
     
+    self.options = options;
+    
+    return self;
+}
+
+- (nonnull NSString*) defaultUserAgent
+{
+    return [self stringValue];
+}
+
+- (nonnull NSString*) stringValue
+{
     NSArray* userAgent = @[[self __productForApplication],
                            [self __productForCFNetwork],
                            [self __productForOS]];
     
-    if (options & CLUUserAgentOptionsAddOSArchitecture) {
+    if (self.options & CLUUserAgentOptionsAddOSArchitecture) {
         userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
     }
     
-    if (options & CLUUserAgentOptionsAddDeviceModel) {
+    if (self.options & CLUUserAgentOptionsAddDeviceModel) {
         userAgent = [userAgent arrayByAddingObject:[self __commentForModel]];
     }
     
@@ -91,12 +113,14 @@
 - (nonnull NSString*) __productForApplication
 {
     NSBundle* main = [NSBundle mainBundle];
+    
 #if TARGET_OS_MAC
     // When runnig unit tests, this won't work via the main bundle.
     if (!main.bundleIdentifier && [NSBundle bundleWithIdentifier:@"com.apple.dt.XCTest"].loaded) {
         return @"xctest (unknown version)";
     }
 #endif
+    
     return [self __productForBundle:main];
 }
 

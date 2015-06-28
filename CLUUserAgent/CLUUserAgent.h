@@ -11,14 +11,13 @@
 
 /**
  Options for specifying User-Agent string features.
- 
- - `CLUUserAgentOptionsNone`: No special options (behave like iOS)
- - `CLUUserAgentOptionsAddOSArchitecture`: Append the kernel CPU architecture comment (just like OSX does): `… (x86_64)`
- - `CLUUserAgentOptionsAddDeviceModel`: Append a device model comment (just like OSX did before 10.10): `… (MacBookPro8%2C2)`
  */
 typedef NS_OPTIONS(NSUInteger, CLUUserAgentOptions) {
+    /// No special options (behave like iOS)
     CLUUserAgentOptionsNone = 0,
+    /// Append the kernel CPU architecture comment (just like OSX does): `… (x86_64)`
     CLUUserAgentOptionsAddOSArchitecture = 1 << 0,
+    /// Append a device model comment (just like OSX did before 10.10): `… (MacBookPro8%2C2)`
     CLUUserAgentOptionsAddDeviceModel = 1 << 1
 };
 
@@ -26,11 +25,30 @@ typedef NS_OPTIONS(NSUInteger, CLUUserAgentOptions) {
  The class `CLUUserAgent` provides an interface to access the system's default
  User-Agent string, as being used by `NSURLSession` and `NSURLConnection`.
  
- Currently, this class only provides an interface to access the system's default
- User-Agent. In the future, it will also provide a way to set up and customize
- your own User-Agent strings.
+ Using initWithOptions:, you can also create a custom User-Agent.
  */
 @interface CLUUserAgent : NSObject
+
+/** @name Creating User-Agent Objects */
+
+/**
+ Create a system default User-Agent string.
+ */
+- (instancetype) init;
+
+/**
+ Create a custom User-Agent string.
+ 
+ @param options The specification of the desired User-Agent components.
+ */
+- (instancetype) initWithOptions:(CLUUserAgentOptions)options NS_DESIGNATED_INITIALIZER;
+
+/// @name Getting the User-Agent configuration
+
+/**
+ Get the options used to create this User-Agent.
+ */
+@property (readonly) CLUUserAgentOptions options;
 
 /** @name Mimicking the System's User-Agent */
 
@@ -39,7 +57,7 @@ typedef NS_OPTIONS(NSUInteger, CLUUserAgentOptions) {
  
  @deprecated Use `-[CLUUserAgent stringValue]` instead.
  */
-- (NSString*) defaultUserAgent;
+- (NSString*) defaultUserAgent CLU_DEPRECATED;
 
 /** @name Accessing the User-Agent string. */
 
