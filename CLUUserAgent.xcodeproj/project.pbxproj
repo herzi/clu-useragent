@@ -24,7 +24,6 @@
 		CF136BEA1B4003CE0037FFA8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF136BE81B4003CE0037FFA8 /* MainMenu.xib */; };
 		CF136C071B4003EC0037FFA8 /* CLUUserAgent_OSX.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C061B4003EC0037FFA8 /* CLUUserAgent_OSX.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF136C0D1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; };
-		CF136C161B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C151B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m */; };
 		CF136C191B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; };
 		CF136C1A1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CF136C261B4007270037FFA8 /* CLUMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C231B4007270037FFA8 /* CLUMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -139,13 +138,13 @@
 		CF136C061B4003EC0037FFA8 /* CLUUserAgent_OSX.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CLUUserAgent_OSX.h; sourceTree = "<group>"; };
 		CF136C0C1B4003EC0037FFA8 /* CLUUserAgent_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLUUserAgent_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF136C141B4003EC0037FFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		CF136C151B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgent_OSXTests.m; sourceTree = "<group>"; };
 		CF136C231B4007270037FFA8 /* CLUMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUMacros.h; sourceTree = "<group>"; };
 		CF136C241B4007270037FFA8 /* CLUUserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUUserAgent.h; sourceTree = "<group>"; };
 		CF136C251B4007270037FFA8 /* CLUUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgent.m; sourceTree = "<group>"; };
 		CF136C2D1B4007A70037FFA8 /* CLUTestServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUTestServer.h; sourceTree = "<group>"; };
 		CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUTestServer.m; sourceTree = "<group>"; };
 		CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgentTests.m; sourceTree = "<group>"; };
+		CF136C481B40532B0037FFA8 /* AppledocSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -207,7 +206,6 @@
 				CF136BC91B4003BC0037FFA8 /* CLUUserAgent_iOSTests */,
 				CF136B8F1B4003980037FFA8 /* iOS_Example */,
 				CF136C031B4003EC0037FFA8 /* CLUUserAgent_OSX */,
-				CF136C121B4003EC0037FFA8 /* CLUUserAgent_OSXTests */,
 				CF136BDE1B4003CE0037FFA8 /* OSX_Example */,
 				CF136B8E1B4003980037FFA8 /* Products */,
 			);
@@ -322,21 +320,13 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		CF136C121B4003EC0037FFA8 /* CLUUserAgent_OSXTests */ = {
-			isa = PBXGroup;
-			children = (
-				CF136C151B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m */,
-				CF136C131B4003EC0037FFA8 /* Supporting Files */,
-			);
-			path = CLUUserAgent_OSXTests;
-			sourceTree = "<group>";
-		};
-		CF136C131B4003EC0037FFA8 /* Supporting Files */ = {
+		CF136C131B4003EC0037FFA8 /* Supporting Files (OSX) */ = {
 			isa = PBXGroup;
 			children = (
 				CF136C141B4003EC0037FFA8 /* Info.plist */,
 			);
-			name = "Supporting Files";
+			name = "Supporting Files (OSX)";
+			path = ../CLUUserAgent_OSXTests;
 			sourceTree = "<group>";
 		};
 		CF136C221B4007270037FFA8 /* CLUUserAgent */ = {
@@ -345,6 +335,7 @@
 				CF136C231B4007270037FFA8 /* CLUMacros.h */,
 				CF136C241B4007270037FFA8 /* CLUUserAgent.h */,
 				CF136C251B4007270037FFA8 /* CLUUserAgent.m */,
+				CF136C471B4053090037FFA8 /* Supporting Files */,
 			);
 			path = CLUUserAgent;
 			sourceTree = "<group>";
@@ -355,8 +346,17 @@
 				CF136C2D1B4007A70037FFA8 /* CLUTestServer.h */,
 				CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */,
 				CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */,
+				CF136C131B4003EC0037FFA8 /* Supporting Files (OSX) */,
 			);
 			path = CLUUserAgentTests;
+			sourceTree = "<group>";
+		};
+		CF136C471B4053090037FFA8 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				CF136C481B40532B0037FFA8 /* AppledocSettings.plist */,
+			);
+			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -412,6 +412,7 @@
 				CF136BB51B4003BC0037FFA8 /* Frameworks */,
 				CF136BB61B4003BC0037FFA8 /* Headers */,
 				CF136BB71B4003BC0037FFA8 /* Resources */,
+				CF136C491B4059910037FFA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -468,6 +469,7 @@
 				CF136BFE1B4003EC0037FFA8 /* Frameworks */,
 				CF136BFF1B4003EC0037FFA8 /* Headers */,
 				CF136C001B4003EC0037FFA8 /* Resources */,
+				CF136C4A1B4059E50037FFA8 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -600,6 +602,37 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		CF136C491B4059910037FFA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -o errexit\nset -o nounset\n\nif test -z \"`which appledoc 2>/dev/null`\"; then\n  echo \"no appledoc found\" >&2\n  exit 0\nfi\n\nappledoc --logformat xcode .";
+			showEnvVarsInLog = 0;
+		};
+		CF136C4A1B4059E50037FFA8 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/bash;
+			shellScript = "set -o errexit\nset -o nounset\n\nif test -z \"`which appledoc 2>/dev/null`\"; then\necho \"no appledoc found\" >&2\nexit 0\nfi\n\nappledoc --logformat xcode .";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		CF136B891B4003980037FFA8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -652,7 +685,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF136C331B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */,
-				CF136C161B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m in Sources */,
 				CF136C351B400F3C0037FFA8 /* CLUTestServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

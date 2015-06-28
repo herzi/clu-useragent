@@ -24,9 +24,9 @@
 
 @implementation CLUUserAgent
 
-#pragma mark: Life Cycle Management
+#pragma mark: System Queries
 
-- (instancetype) init
++ (CLUUserAgentOptions)defaultOptions
 {
     NSUInteger options = CLUUserAgentOptionsNone;
     
@@ -40,8 +40,15 @@
         options |= CLUUserAgentOptionsAddDeviceModel;
     }
 #endif
+    
+    return options;
+}
 
-    return [self initWithOptions:options];
+#pragma mark: Life Cycle Management
+
+- (instancetype) init
+{
+    return [self initWithOptions:[self.class defaultOptions]];
 }
 
 - (instancetype) initWithOptions:(CLUUserAgentOptions)options
@@ -51,11 +58,6 @@
     self.options = options;
     
     return self;
-}
-
-- (nonnull NSString*) defaultUserAgent
-{
-    return [self stringValue];
 }
 
 - (nonnull NSString*) stringValue
@@ -151,6 +153,13 @@
     }
     
     return [NSString stringWithFormat:@"%s/%s", name.sysname, name.release];
+}
+
+#pragma mark- Deprecated Methods
+
+- (nonnull NSString*) defaultUserAgent
+{
+    return [self stringValue];
 }
 
 @end

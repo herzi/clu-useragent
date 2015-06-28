@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>--project-name</key>
+	<string>CLUUserAgent</string>
+	<key>--project-company</key>
+	<string>Sven Herzberg</string>
+	<key>--company-id</key>
+	<string>com.github.herzi</string>
+	<key>--docset-atom-filename</key>
+	<string>CLUUserAgent.atom</string>
+	<key>--docset-feed-url</key>
+	<string>http://cocoanetics.github.com/DTFoundation/%DOCSETATOMFILENAME</string>
+	<key>--docset-package-url</key>
+	<string>http://cocoanetics.github.com/DTFoundation/%DOCSETPACKAGEFILENAME</string>
+	<key>--docset-fallback-url</key>
+	<string>http://cocoanetics.github.com/DTFoundation/</string>
+	<key>--output</key>
+	<string>docs</string>
+	<key>--publish-docset</key>
+	<true/>
+	<key>--keep-undocumented-objects</key>
+	<true/>
+	<key>--keep-undocumented-members</key>
+	<true/>
+	<key>--keep-intermediate-files</key>
+	<true/>
+	<key>--repeat-first-par</key>
+	<false/>
+	<key>--warn-invalid-crossref</key>
+	<false/>
+	<key>--ignore</key>
+	<array>
+		<string>*.m</string>
+		<string>CLUUserAgentTests</string>
+		<string>iOS_Example</string>
+		<string>OSX_Example</string>
+	</array>
+	<key>--index-desc</key>
+	<string>README.md</string>
+</dict>
+</plist>

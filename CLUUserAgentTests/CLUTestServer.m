@@ -63,7 +63,7 @@
     }
     
     for (CLUTestServerSocket* s in self.observers) {
-        [self.notificationCenter removeObserver:self.observers[s] name:NSFileHandleConnectionAcceptedNotification object:s.fileHandle];
+        [self.notificationCenter removeObserver:self.observers[s] name:NSFileHandleReadCompletionNotification object:s.fileHandle];
     }
 }
 
@@ -196,38 +196,9 @@
             return;
         }
         
-        [notification.object acceptConnectionInBackgroundAndNotify];
         NSFileHandle* connection = notification.userInfo[NSFileHandleNotificationFileHandleItem];
-        id<NSObject> observer = [self.notificationCenter addObserverForName:NSFileHandleReadCompletionNotification object:connection queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
-            CLU_STRENGTHEN(self); // for NSAssert
-            NSString* d = [[NSString alloc] initWithData:notification.userInfo[NSFileHandleNotificationDataItem] encoding:NSUTF8StringEncoding];
-            NSArray* lines = [d componentsSeparatedByString:@"\r\n"];
-            
-            NSString* userAgent = nil;
-            NSString* uaPrefix = @"User-Agent: ";
-            for (NSString* line in lines) {
-                if ([line hasPrefix:uaPrefix]) {
-                    userAgent = [line substringFromIndex:uaPrefix.length];
-                }
-            }
-            
-            if (!userAgent) {
-                @throw [NSException exceptionWithName:@"FIXME" reason:@"Return 400" userInfo:nil];
-            }
-            
-            NSMutableArray* response = [NSMutableArray array];
-            NSAssert([lines.firstObject hasSuffix:@" HTTP/1.1"], nil);
-            [response addObject:@"HTTP/1.1 200 OK"];
-            [response addObject:[NSString stringWithFormat:@"Content-Length: %lu", (unsigned long)[userAgent lengthOfBytesUsingEncoding:NSUTF8StringEncoding]]];
-            [response addObject:@""]; // Header Complete
-            [response addObject:userAgent];
-            [response addObject:@""]; // Body Complete
-            NSString* reply = [response componentsJoinedByString:@"\r\n"];
-            [connection writeData:[reply dataUsingEncoding:NSUTF8StringEncoding]];
-            [connection closeFile];
-        }];
-        self.observers[[CLUTestServerSocket socketWithFileHandle:connection]] = observer;
-        [connection readInBackgroundAndNotify];
+        [self __acceptConnection:connection];
+        [notification.object acceptConnectionInBackgroundAndNotify];
     }];
     
     [handle acceptConnectionInBackgroundAndNotify];
@@ -239,6 +210,55 @@
     result.port = @(htons(port));
     result.path = @"/";
     return [result URL];
+}
+
+- (void) __acceptConnection:(NSFileHandle*)connection
+{
+    CLU_WEAKEN(self);
+    id<NSObject> observer = [self.notificationCenter addObserverForName:NSFileHandleReadCompletionNotification object:connection queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
+        CLU_STRENGTHEN(self);
+        NSData* data = notification.userInfo[NSFileHandleNotificationDataItem];
+        [self __connection:connection hasData:data];
+    }];
+    self.observers[[CLUTestServerSocket socketWithFileHandle:connection]] = observer;
+    [connection readInBackgroundAndNotify];
+}
+
+- (void) __connection:(NSFileHandle*)connection hasData:(NSData*)data
+{
+    NSString* d = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSArray* lines = [d componentsSeparatedByString:@"\r\n"];
+    
+    NSString* userAgent = nil;
+    NSString* uaPrefix = @"User-Agent: ";
+    for (NSString* line in lines) {
+        if ([line hasPrefix:uaPrefix]) {
+            userAgent = [line substringFromIndex:uaPrefix.length];
+        }
+    }
+    
+    if (!userAgent) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Return 400" userInfo:nil];
+    }
+    
+    NSMutableArray* response = [NSMutableArray array];
+    NSAssert([lines.firstObject hasSuffix:@" HTTP/1.1"], nil);
+    [response addObject:@"HTTP/1.1 200 OK"];
+    [response addObject:[NSString stringWithFormat:@"Content-Length: %lu", (unsigned long)[userAgent lengthOfBytesUsingEncoding:NSUTF8StringEncoding]]];
+    [response addObject:@""]; // Header Complete
+    [response addObject:userAgent];
+    [response addObject:@""]; // Body Complete
+    NSString* reply = [response componentsJoinedByString:@"\r\n"];
+    [connection writeData:[reply dataUsingEncoding:NSUTF8StringEncoding]];
+    [connection closeFile];
+    
+    for (CLUTestServerSocket* socket in self.observers) {
+        if (socket.fileHandle == connection) {
+            [self.notificationCenter removeObserver:self.observers[socket] name:NSFileHandleReadCompletionNotification object:connection];
+            [self.observers removeObjectForKey:socket];
+            break;
+        }
+    }
 }
 
 @end

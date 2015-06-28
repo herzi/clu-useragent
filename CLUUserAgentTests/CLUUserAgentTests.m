@@ -32,8 +32,6 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
 - (void)setUp
 {
     [super setUp];
-    
-    sut = [[CLUUserAgent alloc] init];
 }
 
 // Put teardown code here. This method is called after the invocation of each test method in the class.
@@ -46,12 +44,40 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
 
 #pragma mark:- Tests
 
-- (void)testExample
+#pragma mark: +defaultOptions
+
+- (void) testDefaultOptions
 {
     // given
+    CLUUserAgentOptions expected = CLUUserAgentOptionsNone;
+#if TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR
+    expected |= CLUUserAgentOptionsAddOSArchitecture;
+    
+    BOOL osxBeforeTenTen = YES;
+#ifdef NSAppKitVersionNumber10_10
+    osxBeforeTenTen = NSAppKitVersionNumber < NSAppKitVersionNumber10_10;
+#endif
+    if (osxBeforeTenTen) {
+        expected |= CLUUserAgentOptionsAddDeviceModel;
+    }
+#endif
     
     // when
-    NSString* result = [sut defaultUserAgent];
+    CLUUserAgentOptions result = [CLUUserAgent defaultOptions];
+    
+    // then
+    XCTAssertEqual(result, expected);
+}
+
+#pragma mark: -defaultUserAgent
+
+- (void)testDefaultUserAgent
+{
+    // given
+    sut = [[CLUUserAgent alloc] init];
+    
+    // when
+    NSString* result = sut.stringValue;
     
     // then
     XCTAssertNotNil(result);
