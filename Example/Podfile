@@ -1,12 +1,28 @@
 source 'https://github.com/CocoaPods/Specs.git'
-use_frameworks!
+# use_frameworks!
 
 target 'CLUUserAgent_Example', :exclusive => true do
+  platform :ios, '8.0'
+
   pod "CLUUserAgent", :path => "../"
 end
 
 target 'CLUUserAgent_Tests', :exclusive => true do
-  pod "CLUUserAgent", :path => "../"
+  platform :ios, '8.0'
 
-  
+  pod "CLUUserAgent", :path => "../"
 end
+
+target 'OSX_Example', :exclusive => true do
+  platform :osx, '10.10'
+
+  pod "CLUUserAgent", :path => "../"
+end
+
+target 'OSX_ExampleTests', :exclusive => true do
+  platform :osx, '10.10'
+
+  pod "CLUUserAgent", :path => "../"
+end
+
+# vim:set ft=ruby:

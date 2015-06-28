@@ -15,6 +15,7 @@
 #  define __nonnull
 #  define __nullable
 # endif
+#elif TARGET_OS_MAC
 #else
 # error Unsupported Platform.
 #endif

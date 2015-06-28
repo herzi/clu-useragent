@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import <CLUUserAgent/CLUMacros.h>
+#import <CLUUserAgent/CLUUserAgent.h>
 
 @interface CLUUserAgent : NSObject
 

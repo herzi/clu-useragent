@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0600"
+   LastUpgradeVersion = "0630"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,9 +14,23 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F589195388D20070C39A"
-               BuildableName = "CLUUserAgent_Example.app"
-               BlueprintName = "CLUUserAgent_Example"
+               BlueprintIdentifier = "CF4A7D591B3F379D00CA1653"
+               BuildableName = "OSX_Example.app"
+               BlueprintName = "OSX_Example"
+               ReferencedContainer = "container:CLUUserAgent.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+         <BuildActionEntry
+            buildForTesting = "YES"
+            buildForRunning = "YES"
+            buildForProfiling = "NO"
+            buildForArchiving = "NO"
+            buildForAnalyzing = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "CF4A7D6B1B3F379D00CA1653"
+               BuildableName = "OSX_ExampleTests.xctest"
+               BlueprintName = "OSX_ExampleTests"
                ReferencedContainer = "container:CLUUserAgent.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -32,9 +46,9 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "6003F5AD195388D20070C39A"
-               BuildableName = "CLUUserAgent_Tests.xctest"
-               BlueprintName = "CLUUserAgent_Tests"
+               BlueprintIdentifier = "CF4A7D6B1B3F379D00CA1653"
+               BuildableName = "OSX_ExampleTests.xctest"
+               BlueprintName = "OSX_ExampleTests"
                ReferencedContainer = "container:CLUUserAgent.xcodeproj">
             </BuildableReference>
          </TestableReference>
@@ -42,9 +56,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "CLUUserAgent_Example.app"
-            BlueprintName = "CLUUserAgent_Example"
+            BlueprintIdentifier = "CF4A7D591B3F379D00CA1653"
+            BuildableName = "OSX_Example.app"
+            BlueprintName = "OSX_Example"
             ReferencedContainer = "container:CLUUserAgent.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -62,9 +76,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "CLUUserAgent_Example.app"
-            BlueprintName = "CLUUserAgent_Example"
+            BlueprintIdentifier = "CF4A7D591B3F379D00CA1653"
+            BuildableName = "OSX_Example.app"
+            BlueprintName = "OSX_Example"
             ReferencedContainer = "container:CLUUserAgent.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
@@ -81,9 +95,9 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "6003F589195388D20070C39A"
-            BuildableName = "CLUUserAgent_Example.app"
-            BlueprintName = "CLUUserAgent_Example"
+            BlueprintIdentifier = "CF4A7D591B3F379D00CA1653"
+            BuildableName = "OSX_Example.app"
+            BlueprintName = "OSX_Example"
             ReferencedContainer = "container:CLUUserAgent.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>

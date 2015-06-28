@@ -22,12 +22,39 @@
                            [self __productForCFNetwork],
                            [self __productForOS]];
     
+#if TARGET_OS_MAC
+    userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
+#endif
+    
     return [userAgent componentsJoinedByString:@" "];
+}
+
+- (nonnull NSString*) __commentForOSArch
+{
+    struct utsname name;
+    memset(&name, 0, sizeof(name));
+    if (0 > uname(&name)) {
+        switch (errno) {
+            case ESRCH: // No such process.
+            default:
+                NSAssert(NO, @"uname(3) failed: %s", strerror(errno));
+                break;
+        }
+    }
+    
+    return [NSString stringWithFormat:@"(%s)", name.machine];
 }
 
 - (nonnull NSString*) __productForApplication
 {
-    return [self __productForBundle:[NSBundle mainBundle]];
+    NSBundle* main = [NSBundle mainBundle];
+#if TARGET_OS_MAC
+    // When runnig unit tests, this won't work via the main bundle.
+    if (!main.bundleIdentifier && [NSBundle bundleWithIdentifier:@"com.apple.dt.XCTest"].loaded) {
+        return @"xctest (unknown version)";
+    }
+#endif
+    return [self __productForBundle:main];
 }
 
 - (nonnull NSString*) __productForBundle:(nonnull NSBundle*)bundle
@@ -45,11 +72,9 @@
 
 - (nonnull NSString*) __productForOS
 {
-    int status;
     struct utsname name;
     memset(&name, 0, sizeof(name));
-    status = uname(&name);
-    if (status < 0) {
+    if (0 > uname(&name)) {
         switch (errno) {
             case ESRCH: // No such process.
             default:

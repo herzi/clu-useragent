@@ -7,7 +7,9 @@
 //
 
 @import XCTest;
-@import CLUUserAgent;
+
+// @import CLUUserAgent;
+#import <CLUUserAgent/CLUUserAgent.h>
 
 #import "CLUTestServer.h"
 
