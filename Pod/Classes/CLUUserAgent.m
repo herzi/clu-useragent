@@ -22,7 +22,7 @@
                            [self __productForCFNetwork],
                            [self __productForOS]];
     
-#if TARGET_OS_MAC
+#if TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR
     userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
 #endif
     
