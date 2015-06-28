@@ -218,7 +218,7 @@
             NSMutableArray* response = [NSMutableArray array];
             NSAssert([lines.firstObject hasSuffix:@" HTTP/1.1"], nil);
             [response addObject:@"HTTP/1.1 200 OK"];
-            [response addObject:[NSString stringWithFormat:@"Content-Length: %lu", [userAgent lengthOfBytesUsingEncoding:NSUTF8StringEncoding]]];
+            [response addObject:[NSString stringWithFormat:@"Content-Length: %lu", (unsigned long)[userAgent lengthOfBytesUsingEncoding:NSUTF8StringEncoding]]];
             [response addObject:@""]; // Header Complete
             [response addObject:userAgent];
             [response addObject:@""]; // Body Complete
