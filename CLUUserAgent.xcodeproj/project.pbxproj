@@ -27,6 +27,17 @@
 		CF136C161B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C151B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m */; };
 		CF136C191B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; };
 		CF136C1A1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CF136C261B4007270037FFA8 /* CLUMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C231B4007270037FFA8 /* CLUMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF136C271B4007270037FFA8 /* CLUMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C231B4007270037FFA8 /* CLUMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF136C281B4007270037FFA8 /* CLUUserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C241B4007270037FFA8 /* CLUUserAgent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF136C291B4007270037FFA8 /* CLUUserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C241B4007270037FFA8 /* CLUUserAgent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF136C2A1B4007270037FFA8 /* CLUUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C251B4007270037FFA8 /* CLUUserAgent.m */; };
+		CF136C2B1B4007270037FFA8 /* CLUUserAgent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C251B4007270037FFA8 /* CLUUserAgent.m */; };
+		CF136C301B4007A70037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
+		CF136C321B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */; };
+		CF136C331B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */; };
+		CF136C351B400F3C0037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
+		CF136C361B400F3E0037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -129,6 +140,12 @@
 		CF136C0C1B4003EC0037FFA8 /* CLUUserAgent_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLUUserAgent_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF136C141B4003EC0037FFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF136C151B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgent_OSXTests.m; sourceTree = "<group>"; };
+		CF136C231B4007270037FFA8 /* CLUMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUMacros.h; sourceTree = "<group>"; };
+		CF136C241B4007270037FFA8 /* CLUUserAgent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUUserAgent.h; sourceTree = "<group>"; };
+		CF136C251B4007270037FFA8 /* CLUUserAgent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgent.m; sourceTree = "<group>"; };
+		CF136C2D1B4007A70037FFA8 /* CLUTestServer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUTestServer.h; sourceTree = "<group>"; };
+		CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUTestServer.m; sourceTree = "<group>"; };
+		CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgentTests.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -184,6 +201,8 @@
 		CF136B821B4003600037FFA8 = {
 			isa = PBXGroup;
 			children = (
+				CF136C221B4007270037FFA8 /* CLUUserAgent */,
+				CF136C2C1B4007A70037FFA8 /* CLUUserAgentTests */,
 				CF136BBA1B4003BC0037FFA8 /* CLUUserAgent_iOS */,
 				CF136BC91B4003BC0037FFA8 /* CLUUserAgent_iOSTests */,
 				CF136B8F1B4003980037FFA8 /* iOS_Example */,
@@ -320,6 +339,26 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CF136C221B4007270037FFA8 /* CLUUserAgent */ = {
+			isa = PBXGroup;
+			children = (
+				CF136C231B4007270037FFA8 /* CLUMacros.h */,
+				CF136C241B4007270037FFA8 /* CLUUserAgent.h */,
+				CF136C251B4007270037FFA8 /* CLUUserAgent.m */,
+			);
+			path = CLUUserAgent;
+			sourceTree = "<group>";
+		};
+		CF136C2C1B4007A70037FFA8 /* CLUUserAgentTests */ = {
+			isa = PBXGroup;
+			children = (
+				CF136C2D1B4007A70037FFA8 /* CLUTestServer.h */,
+				CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */,
+				CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */,
+			);
+			path = CLUUserAgentTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -327,6 +366,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C281B4007270037FFA8 /* CLUUserAgent.h in Headers */,
+				CF136C261B4007270037FFA8 /* CLUMacros.h in Headers */,
 				CF136BBE1B4003BC0037FFA8 /* CLUUserAgent_iOS.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -335,6 +376,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C291B4007270037FFA8 /* CLUUserAgent.h in Headers */,
+				CF136C271B4007270037FFA8 /* CLUMacros.h in Headers */,
 				CF136C071B4003EC0037FFA8 /* CLUUserAgent_OSX.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -572,6 +615,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C2A1B4007270037FFA8 /* CLUUserAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -579,7 +623,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C321B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */,
 				CF136BCD1B4003BC0037FFA8 /* CLUUserAgent_iOSTests.m in Sources */,
+				CF136C301B4007A70037FFA8 /* CLUTestServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -589,6 +635,7 @@
 			files = (
 				CF136BE51B4003CE0037FFA8 /* main.m in Sources */,
 				CF136BE31B4003CE0037FFA8 /* AppDelegate.m in Sources */,
+				CF136C361B400F3E0037FFA8 /* CLUTestServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -596,6 +643,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C2B1B4007270037FFA8 /* CLUUserAgent.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -603,7 +651,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C331B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */,
 				CF136C161B4003EC0037FFA8 /* CLUUserAgent_OSXTests.m in Sources */,
+				CF136C351B400F3C0037FFA8 /* CLUTestServer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -673,12 +723,22 @@
 		CF136B871B4003600037FFA8 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)",
+				);
 			};
 			name = Debug;
 		};
 		CF136B881B4003600037FFA8 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				HEADER_SEARCH_PATHS = (
+					"$(inherited)",
+					/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include,
+					"$(SRCROOT)",
+				);
 			};
 			name = Release;
 		};
@@ -1284,6 +1344,7 @@
 				CF136BB01B4003980037FFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF136BD21B4003BC0037FFA8 /* Build configuration list for PBXNativeTarget "CLUUserAgent_iOS" */ = {
 			isa = XCConfigurationList;
@@ -1292,6 +1353,7 @@
 				CF136BD41B4003BC0037FFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF136BD61B4003BC0037FFA8 /* Build configuration list for PBXNativeTarget "CLUUserAgent_iOSTests" */ = {
 			isa = XCConfigurationList;
@@ -1300,6 +1362,7 @@
 				CF136BD81B4003BC0037FFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF136BF71B4003CE0037FFA8 /* Build configuration list for PBXNativeTarget "OSX_Example" */ = {
 			isa = XCConfigurationList;
@@ -1308,6 +1371,7 @@
 				CF136BF91B4003CE0037FFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF136C1B1B4003EC0037FFA8 /* Build configuration list for PBXNativeTarget "CLUUserAgent_OSX" */ = {
 			isa = XCConfigurationList;
@@ -1316,6 +1380,7 @@
 				CF136C1D1B4003EC0037FFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		CF136C1F1B4003EC0037FFA8 /* Build configuration list for PBXNativeTarget "CLUUserAgent_OSXTests" */ = {
 			isa = XCConfigurationList;
@@ -1324,6 +1389,7 @@
 				CF136C211B4003EC0037FFA8 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
