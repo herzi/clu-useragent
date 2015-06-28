@@ -6,8 +6,12 @@
 //  Copyright (c) 2015 Sven Herzberg. All rights reserved.
 //
 
+/* In this header, you should import all the public headers of your framework
+ * using statements like #import <CLUUserAgent/PublicHeader.h> */
+
 #import <Foundation/Foundation.h>
 #import <CLUUserAgent/CLUMacros.h>
+#import <CLUUserAgent/CLUVersion.h>
 
 /**
  Options for specifying User-Agent string features.

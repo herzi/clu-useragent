@@ -26,7 +26,7 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
 
 @synthesize sut;
 
-#pragma mark:- Life Cycle
+#pragma mark- Life Cycle
 
 // Put setup code here. This method is called before the invocation of each test method in the class.
 - (void)setUp
@@ -42,9 +42,27 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
     [super tearDown];
 }
 
-#pragma mark:- Tests
+#pragma mark- Properties:
 
-#pragma mark: +defaultOptions
+#pragma mark • stringValue
+
+- (void)testStringValue
+{
+    // given
+    sut = [[CLUUserAgent alloc] init];
+    
+    // when
+    NSString* result = sut.stringValue;
+    
+    // then
+    XCTAssertNotNil(result);
+    XCTAssertEqualObjects(result, [self userAgentFromNSURLConnection]);
+    XCTAssertEqualObjects(result, [self userAgentFromNSURLSession]);
+}
+
+#pragma mark- Methods:
+
+#pragma mark +defaultOptions
 
 - (void) testDefaultOptions
 {
@@ -69,23 +87,40 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
     XCTAssertEqual(result, expected);
 }
 
-#pragma mark: -defaultUserAgent
+#pragma mark -init
 
-- (void)testDefaultUserAgent
+- (void)testInit
 {
     // given
     sut = [[CLUUserAgent alloc] init];
     
     // when
-    NSString* result = sut.stringValue;
+    CLUUserAgentOptions result = sut.options;
     
     // then
-    XCTAssertNotNil(result);
-    XCTAssertEqualObjects(result, [self userAgentFromNSURLConnection]);
-    XCTAssertEqualObjects(result, [self userAgentFromNSURLSession]);
+    XCTAssertEqual(result, [CLUUserAgent defaultOptions]);
 }
 
-#pragma mark:- Utilities
+- (void)testInitWithCode
+{
+    // given
+    CLUUserAgentOptions options[] = {
+        CLUUserAgentOptionsNone,
+        CLUUserAgentOptionsAddOSArchitecture,
+        CLUUserAgentOptionsAddDeviceModel,
+        CLUUserAgentOptionsAddDeviceModel | CLUUserAgentOptionsAddOSArchitecture
+    };
+    
+    for (size_t i = 0; i < sizeof(options) / sizeof(*options); i += 1) {
+        // when
+        sut = [[CLUUserAgent alloc] initWithOptions:options[i]];
+        
+        // then
+        XCTAssertEqual(sut.options, options[i], @"(i = %lu)", i);
+    }
+}
+
+#pragma mark- Utilities
 
 - (NSString*) userAgentFromNSURLConnection
 {

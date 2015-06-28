@@ -226,7 +226,7 @@
 
 - (void) __connection:(NSFileHandle*)connection hasData:(NSData*)data
 {
-    NSString* d = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSString* d = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
     NSArray* lines = [d componentsSeparatedByString:@"\r\n"];
     
     NSString* userAgent = nil;
