@@ -9,7 +9,7 @@
 
 Pod::Spec.new do |s|
   s.name             = "CLUUserAgent"
-  s.version          = "0.1.0"
+  s.version          = "0.2.0"
   s.summary          = "Consistent User-Agent Strings for Cocoa"
   s.description      = <<-DESC
                        Provide consistent User-Agent strings for Cocoa apps:
@@ -25,7 +25,7 @@ Pod::Spec.new do |s|
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
-  s.osx.deployment_target = '10.10'
+  s.osx.deployment_target = '10.9'
   s.requires_arc = true
 
   s.source_files = 'CLUUserAgent/*'
