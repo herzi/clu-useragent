@@ -18,7 +18,12 @@
 
 @implementation CLUUserAgent
 
-- (NSString*)defaultUserAgent
+- (nonnull NSString*) defaultUserAgent
+{
+    return [self stringValue];
+}
+
+- (nonnull NSString*) stringValue
 {
     NSArray* userAgent = @[[self __productForApplication],
                            [self __productForCFNetwork],
