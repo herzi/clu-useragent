@@ -96,7 +96,7 @@ typedef NS_OPTIONS(NSUInteger, CLUUserAgentOptions) {
  
  @availability CLUUserAgent (0.3.0 and later)
  */
-@property (readonly) NSString* __nonnull stringValue;
+@property (copy, readonly) NSString* __nonnull stringValue;
 
 /// @name Deprecated Methods
 

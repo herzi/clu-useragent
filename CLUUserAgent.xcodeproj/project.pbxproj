@@ -40,6 +40,10 @@
 		CF136C331B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */; };
 		CF136C351B400F3C0037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
 		CF136C361B400F3E0037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
+		CF136C4D1B4152210037FFA8 /* CLUUAComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */; };
+		CF136C4E1B4152210037FFA8 /* CLUUAComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */; };
+		CF136C4F1B4152210037FFA8 /* CLUUAComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */; };
+		CF136C501B4152210037FFA8 /* CLUUAComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -148,6 +152,8 @@
 		CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUTestServer.m; sourceTree = "<group>"; };
 		CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUserAgentTests.m; sourceTree = "<group>"; };
 		CF136C481B40532B0037FFA8 /* AppledocSettings.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = AppledocSettings.plist; sourceTree = SOURCE_ROOT; };
+		CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUUAComponent.h; sourceTree = "<group>"; };
+		CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUAComponent.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -309,6 +315,8 @@
 			isa = PBXGroup;
 			children = (
 				CF136C231B4007270037FFA8 /* CLUMacros.h */,
+				CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */,
+				CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */,
 				CF136C241B4007270037FFA8 /* CLUUserAgent.h */,
 				CF136C251B4007270037FFA8 /* CLUUserAgent.m */,
 				CF086BD71B40766700955A31 /* CLUVersion.h */,
@@ -351,6 +359,7 @@
 				CF086BDA1B40767E00955A31 /* CLUVersion.h in Headers */,
 				CF136C281B4007270037FFA8 /* CLUUserAgent.h in Headers */,
 				CF136C261B4007270037FFA8 /* CLUMacros.h in Headers */,
+				CF136C4D1B4152210037FFA8 /* CLUUAComponent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +370,7 @@
 				CF086BDB1B40767F00955A31 /* CLUVersion.h in Headers */,
 				CF136C291B4007270037FFA8 /* CLUUserAgent.h in Headers */,
 				CF136C271B4007270037FFA8 /* CLUMacros.h in Headers */,
+				CF136C4E1B4152210037FFA8 /* CLUUAComponent.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -631,6 +641,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF136C2A1B4007270037FFA8 /* CLUUserAgent.m in Sources */,
+				CF136C4F1B4152210037FFA8 /* CLUUAComponent.m in Sources */,
 				CF086BDD1B407A9800955A31 /* CLUVersion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -660,6 +671,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CF136C2B1B4007270037FFA8 /* CLUUserAgent.m in Sources */,
+				CF136C501B4152210037FFA8 /* CLUUAComponent.m in Sources */,
 				CF086BDE1B407A9900955A31 /* CLUVersion.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
