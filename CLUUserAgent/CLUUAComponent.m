@@ -6,7 +6,7 @@
 //
 //
 
-#import "CLUUAComponent.h"
+#import <CLUUserAgent/CLUUserAgent.h>
 
 @interface CLUUAComponent ()
 

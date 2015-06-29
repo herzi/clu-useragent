@@ -6,7 +6,7 @@
 //
 //
 
-#import <CLUUserAgent/CLUVersion.h>
+#import <CLUUserAgent/CLUUserAgent.h>
 
 int CLUUserAgentVersion = /*00*/300;
 int CLUUserAgentVersionMajor = 0;

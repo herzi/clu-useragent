@@ -12,6 +12,10 @@
 
 #define CLU_DEPRECATED __attribute__((__deprecated__))
 
+#pragma mark Module Visibility Qualifiers
+
+#define CLU_PUBLIC_CLASS __attribute__((visibility("default")))
+
 #pragma mark Nullability Qualifiers
 
 /* Nullability Qualifiers were Introduced with Swift 1.2, in Xcode 6.3.

@@ -6,7 +6,9 @@
 //
 //
 
-#import <Foundation/Foundation.h>
+#ifndef CLU_PUBLIC_CLASS
+# error Only <CLUUserAgent/CLUUserAgent.h> should be included directly.
+#endif
 
 //! Project version number for CLUUserAgent.
 FOUNDATION_EXPORT int CLUUserAgentVersion;

@@ -6,12 +6,12 @@
 //  Copyright (c) 2015 Sven Herzberg. All rights reserved.
 //
 
+#import <CLUUserAgent/CLUMacros.h>
+
 /* In this header, you should import all the public headers of your framework
  * using statements like #import <CLUUserAgent/PublicHeader.h> */
 
-#import <Foundation/Foundation.h>
 #import <CLUUserAgent/CLUUAComponent.h>
-#import <CLUUserAgent/CLUMacros.h>
 #import <CLUUserAgent/CLUVersion.h>
 
 /**
@@ -48,7 +48,7 @@ typedef NS_OPTIONS(NSUInteger, CLUUserAgentOptions) {
  
  @availability CLUUserAgent (0.1.0 and later)
  */
-@interface CLUUserAgent : NSObject
+CLU_PUBLIC_CLASS @interface CLUUserAgent : NSObject
 
 /// @name Query the System's User-Agent
 

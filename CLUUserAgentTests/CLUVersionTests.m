@@ -8,7 +8,7 @@
 
 #import <XCTest/XCTest.h>
 
-#import <CLUUserAgent/CLUVersion.h>
+#import <CLUUserAgent/CLUUserAgent.h>
 
 @interface CLUVersionTests : XCTestCase
 

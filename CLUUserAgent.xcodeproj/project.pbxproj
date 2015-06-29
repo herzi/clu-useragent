@@ -19,16 +19,16 @@
 		CF136B9C1B4003980037FFA8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = CF136B9A1B4003980037FFA8 /* Main.storyboard */; };
 		CF136B9E1B4003980037FFA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF136B9D1B4003980037FFA8 /* Images.xcassets */; };
 		CF136BA11B4003980037FFA8 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF136B9F1B4003980037FFA8 /* LaunchScreen.xib */; };
-		CF136BC41B4003BC0037FFA8 /* CLUUserAgent_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136BB91B4003BC0037FFA8 /* CLUUserAgent_iOS.framework */; };
-		CF136BD01B4003BC0037FFA8 /* CLUUserAgent_iOS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136BB91B4003BC0037FFA8 /* CLUUserAgent_iOS.framework */; };
-		CF136BD11B4003BC0037FFA8 /* CLUUserAgent_iOS.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF136BB91B4003BC0037FFA8 /* CLUUserAgent_iOS.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CF136BC41B4003BC0037FFA8 /* CLUUserAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136BB91B4003BC0037FFA8 /* CLUUserAgent.framework */; };
+		CF136BD01B4003BC0037FFA8 /* CLUUserAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136BB91B4003BC0037FFA8 /* CLUUserAgent.framework */; };
+		CF136BD11B4003BC0037FFA8 /* CLUUserAgent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF136BB91B4003BC0037FFA8 /* CLUUserAgent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CF136BE31B4003CE0037FFA8 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136BE21B4003CE0037FFA8 /* AppDelegate.m */; };
 		CF136BE51B4003CE0037FFA8 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136BE41B4003CE0037FFA8 /* main.m */; };
 		CF136BE71B4003CE0037FFA8 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CF136BE61B4003CE0037FFA8 /* Images.xcassets */; };
 		CF136BEA1B4003CE0037FFA8 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = CF136BE81B4003CE0037FFA8 /* MainMenu.xib */; };
-		CF136C0D1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; };
-		CF136C191B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; };
-		CF136C1A1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		CF136C0D1B4003EC0037FFA8 /* CLUUserAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent.framework */; };
+		CF136C191B4003EC0037FFA8 /* CLUUserAgent.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent.framework */; };
+		CF136C1A1B4003EC0037FFA8 /* CLUUserAgent.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = CF136C021B4003EC0037FFA8 /* CLUUserAgent.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		CF136C261B4007270037FFA8 /* CLUMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C231B4007270037FFA8 /* CLUMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF136C271B4007270037FFA8 /* CLUMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C231B4007270037FFA8 /* CLUMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF136C281B4007270037FFA8 /* CLUUserAgent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C241B4007270037FFA8 /* CLUUserAgent.h */; settings = {ATTRIBUTES = (Public, ); }; };
@@ -40,8 +40,8 @@
 		CF136C331B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */; };
 		CF136C351B400F3C0037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
 		CF136C361B400F3E0037FFA8 /* CLUTestServer.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */; };
-		CF136C4D1B4152210037FFA8 /* CLUUAComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */; };
-		CF136C4E1B4152210037FFA8 /* CLUUAComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */; };
+		CF136C4D1B4152210037FFA8 /* CLUUAComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		CF136C4E1B4152210037FFA8 /* CLUUAComponent.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF136C4F1B4152210037FFA8 /* CLUUAComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */; };
 		CF136C501B4152210037FFA8 /* CLUUAComponent.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */; };
 /* End PBXBuildFile section */
@@ -98,7 +98,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CF136BD11B4003BC0037FFA8 /* CLUUserAgent_iOS.framework in Embed Frameworks */,
+				CF136BD11B4003BC0037FFA8 /* CLUUserAgent.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -109,7 +109,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				CF136C1A1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Embed Frameworks */,
+				CF136C1A1B4003EC0037FFA8 /* CLUUserAgent.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -130,7 +130,7 @@
 		CF136B9B1B4003980037FFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		CF136B9D1B4003980037FFA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CF136BA01B4003980037FFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
-		CF136BB91B4003BC0037FFA8 /* CLUUserAgent_iOS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLUUserAgent_iOS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF136BB91B4003BC0037FFA8 /* CLUUserAgent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLUUserAgent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF136BBC1B4003BC0037FFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF136BC31B4003BC0037FFA8 /* CLUUserAgent_iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLUUserAgent_iOSTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF136BCB1B4003BC0037FFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 		CF136BE41B4003CE0037FFA8 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		CF136BE61B4003CE0037FFA8 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		CF136BE91B4003CE0037FFA8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
-		CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLUUserAgent_OSX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		CF136C021B4003EC0037FFA8 /* CLUUserAgent.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CLUUserAgent.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF136C051B4003EC0037FFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CF136C0C1B4003EC0037FFA8 /* CLUUserAgent_OSXTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CLUUserAgent_OSXTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CF136C141B4003EC0037FFA8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF136BD01B4003BC0037FFA8 /* CLUUserAgent_iOS.framework in Frameworks */,
+				CF136BD01B4003BC0037FFA8 /* CLUUserAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +176,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF136BC41B4003BC0037FFA8 /* CLUUserAgent_iOS.framework in Frameworks */,
+				CF136BC41B4003BC0037FFA8 /* CLUUserAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,7 +184,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF136C191B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */,
+				CF136C191B4003EC0037FFA8 /* CLUUserAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -199,7 +199,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CF136C0D1B4003EC0037FFA8 /* CLUUserAgent_OSX.framework in Frameworks */,
+				CF136C0D1B4003EC0037FFA8 /* CLUUserAgent.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -213,21 +213,19 @@
 				CF136C2C1B4007A70037FFA8 /* CLUUserAgentTests */,
 				CF136B8F1B4003980037FFA8 /* iOS_Example */,
 				CF136BDE1B4003CE0037FFA8 /* OSX_Example */,
-				CF136B8E1B4003980037FFA8 /* Products */,
+				CF136C511B4161580037FFA8 /* Products (iOS) */,
+				CF136B8E1B4003980037FFA8 /* Products (OSX) */,
 			);
 			sourceTree = "<group>";
 		};
-		CF136B8E1B4003980037FFA8 /* Products */ = {
+		CF136B8E1B4003980037FFA8 /* Products (OSX) */ = {
 			isa = PBXGroup;
 			children = (
-				CF136B8D1B4003980037FFA8 /* iOS_Example.app */,
-				CF136BB91B4003BC0037FFA8 /* CLUUserAgent_iOS.framework */,
-				CF136BC31B4003BC0037FFA8 /* CLUUserAgent_iOSTests.xctest */,
 				CF136BDD1B4003CE0037FFA8 /* OSX_Example.app */,
-				CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */,
+				CF136BB91B4003BC0037FFA8 /* CLUUserAgent.framework */,
 				CF136C0C1B4003EC0037FFA8 /* CLUUserAgent_OSXTests.xctest */,
 			);
-			name = Products;
+			name = "Products (OSX)";
 			sourceTree = "<group>";
 		};
 		CF136B8F1B4003980037FFA8 /* iOS_Example */ = {
@@ -349,6 +347,16 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		CF136C511B4161580037FFA8 /* Products (iOS) */ = {
+			isa = PBXGroup;
+			children = (
+				CF136B8D1B4003980037FFA8 /* iOS_Example.app */,
+				CF136C021B4003EC0037FFA8 /* CLUUserAgent.framework */,
+				CF136BC31B4003BC0037FFA8 /* CLUUserAgent_iOSTests.xctest */,
+			);
+			name = "Products (iOS)";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -412,7 +420,7 @@
 			);
 			name = CLUUserAgent_iOS;
 			productName = CLUUserAgent_iOS;
-			productReference = CF136BB91B4003BC0037FFA8 /* CLUUserAgent_iOS.framework */;
+			productReference = CF136BB91B4003BC0037FFA8 /* CLUUserAgent.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CF136BC21B4003BC0037FFA8 /* CLUUserAgent_iOSTests */ = {
@@ -469,7 +477,7 @@
 			);
 			name = CLUUserAgent_OSX;
 			productName = CLUUserAgent_OSX;
-			productReference = CF136C021B4003EC0037FFA8 /* CLUUserAgent_OSX.framework */;
+			productReference = CF136C021B4003EC0037FFA8 /* CLUUserAgent.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		CF136C0B1B4003EC0037FFA8 /* CLUUserAgent_OSXTests */ = {
@@ -530,7 +538,7 @@
 				Base,
 			);
 			mainGroup = CF136B821B4003600037FFA8;
-			productRefGroup = CF136B8E1B4003980037FFA8 /* Products */;
+			productRefGroup = CF136B8E1B4003980037FFA8 /* Products (OSX) */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
@@ -908,7 +916,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -953,7 +961,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1191,9 +1199,10 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
 		};
@@ -1237,9 +1246,10 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_NAME = "$(PROJECT_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
+				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Release;
 		};
