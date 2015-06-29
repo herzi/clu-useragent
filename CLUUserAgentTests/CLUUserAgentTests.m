@@ -176,7 +176,7 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
         } else if ([kSuffix isEqualToString:tests[test]]) {
             XCTAssertTrue([sut.stringValue hasSuffix:[@") " stringByAppendingString:name]]);
         } else {
-            XCTAssertTrue([sut.stringValue containsString:tests[test]],
+            XCTAssertTrue([sut.stringValue rangeOfString:tests[test]].location != NSNotFound,
                           @"Expected to find “%@” in “%@” but it wasn't found (weight: %lu).",
                           tests[test], sut.stringValue,
                           test.unsignedIntegerValue);
