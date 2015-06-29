@@ -16,7 +16,9 @@
 // HTTP 1.1 => Protocol Parameters => Product Token: http://www.w3.org/Protocols/rfc2616/rfc2616-sec3.html#sec3.8
 // HTTP 1.1 => Headers => User-Agent: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
 
-@interface CLUUserAgent ()
+@interface CLUUserAgent () {
+    NSMutableArray* __nonnull _components;
+}
 
 @property CLUUserAgentOptions options;
 
@@ -60,25 +62,41 @@
     return self;
 }
 
-- (nonnull NSString*) stringValue
+#pragma mark: User-Agent Generator
+
+- (nonnull NSArray*) components
 {
-    NSArray* userAgent = @[[self __productForApplication],
-                           [self __productForCFNetwork],
-                           [self __productForOS]];
-    
-    if (self.options & CLUUserAgentOptionsAddOSArchitecture) {
-        userAgent = [userAgent arrayByAddingObject:[self __commentForOSArch]];
+    if (!_components) {
+        NSMutableArray* components = [NSMutableArray array];
+        [components addObject:[self __productForApplication]];
+        [components addObject:[self __productForCFNetwork]];
+        [components addObject:[self __productForOS]];
+        
+        if (self.options & CLUUserAgentOptionsAddOSArchitecture) {
+            [components addObject:[self __commentForOSArch]];
+        }
+        
+        if (self.options & CLUUserAgentOptionsAddDeviceModel) {
+            [components addObject:[self __commentForModel]];
+        }
+        
+        _components = components;
     }
     
-    if (self.options & CLUUserAgentOptionsAddDeviceModel) {
-        userAgent = [userAgent arrayByAddingObject:[self __commentForModel]];
-    }
-    
-    
-    return [userAgent componentsJoinedByString:@" "];
+    return [_components copy];
 }
 
-- (nonnull NSString*) __commentForModel
+- (nonnull NSString*) stringValue
+{
+    NSMutableArray* strings = [NSMutableArray array];
+    for (CLUUAComponent* component in self.components) {
+        [strings addObject:component.stringValue];
+    }
+    
+    return [strings componentsJoinedByString:@" "];
+}
+
+- (nonnull CLUUAComponent*) __commentForModel
 {
     char modelBuffer[256];
     size_t sz = sizeof(modelBuffer);
@@ -90,13 +108,15 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"buffer too short" userInfo:nil];
     }
     modelBuffer[sz] = 0;
+    
     NSString* model = [NSString stringWithCString:modelBuffer encoding:NSASCIIStringEncoding];
     model = [model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
     model = [model stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-    return [NSString stringWithFormat:@"(%@)", model];
+    model = [NSString stringWithFormat:@"(%@)", model];
+    return [[CLUUAComponent alloc] initWithStringValue:model];
 }
 
-- (nonnull NSString*) __commentForOSArch
+- (nonnull CLUUAComponent*) __commentForOSArch
 {
     struct utsname name;
     memset(&name, 0, sizeof(name));
@@ -109,37 +129,37 @@
         }
     }
     
-    return [NSString stringWithFormat:@"(%s)", name.machine];
+    return [[CLUUAComponent alloc] initWithStringValue:[NSString stringWithFormat:@"(%s)", name.machine]];
 }
 
-- (nonnull NSString*) __productForApplication
+- (nonnull CLUUAComponent*) __productForApplication
 {
     NSBundle* main = [NSBundle mainBundle];
     
 #if TARGET_OS_MAC
     // When runnig unit tests, this won't work via the main bundle.
     if (!main.bundleIdentifier && [NSBundle bundleWithIdentifier:@"com.apple.dt.XCTest"].loaded) {
-        return @"xctest (unknown version)";
+        return [[CLUUAComponent alloc] initWithStringValue:@"xctest (unknown version)"];
     }
 #endif
     
     return [self __productForBundle:main];
 }
 
-- (nonnull NSString*) __productForBundle:(nonnull NSBundle*)bundle
+- (nonnull CLUUAComponent*) __productForBundle:(nonnull NSBundle*)bundle
 {
     NSString* bundleName = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
     NSString* bundleVersion = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
     
-    return [NSString stringWithFormat:@"%@/%@", bundleName, bundleVersion];
+    return [[CLUUAComponent alloc] initWithStringValue:[NSString stringWithFormat:@"%@/%@", bundleName, bundleVersion]];
 }
 
-- (nonnull NSString*) __productForCFNetwork
+- (nonnull CLUUAComponent*) __productForCFNetwork
 {
     return [self __productForBundle:[NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"]];
 }
 
-- (nonnull NSString*) __productForOS
+- (nonnull CLUUAComponent*) __productForOS
 {
     struct utsname name;
     memset(&name, 0, sizeof(name));
@@ -152,7 +172,7 @@
         }
     }
     
-    return [NSString stringWithFormat:@"%s/%s", name.sysname, name.release];
+    return [[CLUUAComponent alloc] initWithStringValue:[NSString stringWithFormat:@"%s/%s", name.sysname, name.release]];
 }
 
 #pragma mark- Deprecated Methods

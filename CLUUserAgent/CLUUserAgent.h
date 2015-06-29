@@ -10,6 +10,7 @@
  * using statements like #import <CLUUserAgent/PublicHeader.h> */
 
 #import <Foundation/Foundation.h>
+#import <CLUUserAgent/CLUUAComponent.h>
 #import <CLUUserAgent/CLUMacros.h>
 #import <CLUUserAgent/CLUVersion.h>
 
