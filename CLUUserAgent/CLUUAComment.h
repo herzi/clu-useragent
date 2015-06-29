@@ -21,9 +21,10 @@
  Create a User-Agent comment.
  
  @param text The comment text.
+ @param weight The weight of the comment.
  
  @availability CLUUserAgent (0.3.0 and later)
  */
-- (nonnull instancetype) initWithText:(nonnull NSString*)text;
+- (nonnull instancetype) initWithText:(nonnull NSString*)text weight:(NSUInteger)weight;
 
 @end

@@ -11,6 +11,7 @@
 @interface CLUUAComponent ()
 
 @property (copy) NSString* __nonnull stringValue;
+@property NSUInteger weight;
 
 @end
 
@@ -21,11 +22,12 @@
     @throw [NSException exceptionWithName:NSInternalInconsistencyException reason:@"Calling -[CLUUAComponent init] is not permitted." userInfo:nil];
 }
 
-- (nonnull instancetype)initWithStringValue:(nonnull NSString *)stringValue
+- (nonnull instancetype)initWithStringValue:(nonnull NSString *)stringValue weight:(NSUInteger)weight
 {
     self = [super init];
     
     self.stringValue = stringValue;
+    self.weight = weight;
     
     return self;
 }

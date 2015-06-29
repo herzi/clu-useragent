@@ -10,10 +10,10 @@
 
 @implementation CLUUAComment
 
-- (nonnull instancetype) initWithText:(nonnull NSString*)text
+- (nonnull instancetype) initWithText:(nonnull NSString*)text weight:(NSUInteger)weight
 {
     NSString* stringValue = [NSString stringWithFormat:@"(%@)", [self escapeString:text]];
-    return [self initWithStringValue:stringValue];
+    return [self initWithStringValue:stringValue weight:weight];
 }
 
 @end

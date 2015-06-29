@@ -11,6 +11,32 @@
 #endif
 
 /**
+ User-Agent Component Weight:
+ 
+ The weight specifies the position inside a User-Agent. Valid values are 0 and
+ 1000 as well as any number between those two.
+ 
+ @note CLUUAComponentWeightFramework is useful for developers of frameworks.
+ They can use this weight to provide a reference to their framework between the
+ application and transport items.
+ */
+typedef NS_ENUM(NSUInteger, CLUUAComponentWeight) {
+    /// The weight of the device model comment (OSX before 10.10.0 only)
+    CLUUAComponentWeightDeviceModel = 100,
+    /// The weight of the kernel product
+    CLUUAComponentWeightKernel = 300,
+    /// The weight of the transport layer product (usually for CFNetwork)
+    CLUUAComponentWeightTransport = 500,
+    /** The weight of the framework product.
+     
+     @see CLUUAComponentWeight for an example.
+     */
+    CLUUAComponentWeightFramework = 700,
+    /// The weight of the application product.
+    CLUUAComponentWeightApplication = 900
+};
+
+/**
  A User-Agent component.
  
  User-Agent strings are composed of multiple components. The User-Agent
@@ -30,10 +56,11 @@
  Create a new User-Agent component.
  
  @param stringValue The string representation of the component.
+ @param weight The weight of the component.
  
  @availability CLUUserAgent (0.3.0 and later)
  */
-- (nonnull instancetype) initWithStringValue:(nonnull NSString*)stringValue;
+- (nonnull instancetype) initWithStringValue:(nonnull NSString*)stringValue weight:(NSUInteger)weight;
 
 /**
  The string representation of the component.

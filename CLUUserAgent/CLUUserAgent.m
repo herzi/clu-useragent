@@ -105,7 +105,7 @@
     modelBuffer[sz] = 0;
     
     NSString* model = [NSString stringWithCString:modelBuffer encoding:NSASCIIStringEncoding];
-    return [[CLUUAComment alloc] initWithText:model];
+    return [[CLUUAComment alloc] initWithText:model weight:CLUUAComponentWeightDeviceModel];
 }
 
 - (nonnull CLUUAComponent*) __productForApplication
@@ -115,24 +115,24 @@
 #if TARGET_OS_MAC
     // When runnig unit tests, this won't work via the main bundle.
     if (!main.bundleIdentifier && [NSBundle bundleWithIdentifier:@"com.apple.dt.XCTest"].loaded) {
-        return [[CLUUAProduct alloc] initWithName:@"xctest" version:nil comment:@"unknown version"];
+        return [[CLUUAProduct alloc] initWithName:@"xctest" version:nil comment:@"unknown version" weight:CLUUAComponentWeightApplication];
     }
 #endif
     
-    return [self __productForBundle:main];
+    return [self __productForBundle:main weight:CLUUAComponentWeightApplication];
 }
 
-- (nonnull CLUUAComponent*) __productForBundle:(nonnull NSBundle*)bundle
+- (nonnull CLUUAComponent*) __productForBundle:(nonnull NSBundle*)bundle weight:(NSUInteger)weight
 {
     NSString* bundleName = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
     NSString* bundleVersion = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
     
-    return [[CLUUAProduct alloc] initWithName:bundleName version:bundleVersion];
+    return [[CLUUAProduct alloc] initWithName:bundleName version:bundleVersion weight:weight];
 }
 
 - (nonnull CLUUAComponent*) __productForCFNetwork
 {
-    return [self __productForBundle:[NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"]];
+    return [self __productForBundle:[NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"] weight:CLUUAComponentWeightTransport];
 }
 
 - (nonnull CLUUAComponent*) __productForKernel
@@ -155,7 +155,8 @@
     
     return [[CLUUAProduct alloc] initWithName:[NSString stringWithCString:name.sysname encoding:NSASCIIStringEncoding]
                                       version:[NSString stringWithCString:name.release encoding:NSASCIIStringEncoding]
-                                      comment:comment];
+                                      comment:comment
+                                       weight:CLUUAComponentWeightKernel];
 }
 
 #pragma mark- Deprecated Methods

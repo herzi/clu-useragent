@@ -634,7 +634,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -o errexit\nset -o nounset\n\nif test -z \"`which appledoc 2>/dev/null`\"; then\n  echo \"no appledoc found\" >&2\n  exit 0\nfi\n\nappledoc --logformat xcode .";
+			shellScript = "set -o errexit\nset -o nounset\n\nif test -z \"`which appledoc 2>/dev/null`\"; then\n  echo \"no appledoc found\" >&2\n  exit 0\nfi\n\nif appledoc --logformat xcode . || test \"$?\" -gt 2; then\n  exit 0\nfi";
 			showEnvVarsInLog = 0;
 		};
 		CF136C4A1B4059E50037FFA8 /* ShellScript */ = {
@@ -648,7 +648,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/bash;
-			shellScript = "set -o errexit\nset -o nounset\n\nif test -z \"`which appledoc 2>/dev/null`\"; then\necho \"no appledoc found\" >&2\nexit 0\nfi\n\nappledoc --logformat xcode .";
+			shellScript = "set -o errexit\nset -o nounset\n\nif test -z \"`which appledoc 2>/dev/null`\"; then\n  echo \"no appledoc found\" >&2\n  exit 0\nfi\n\nif appledoc --logformat xcode . || test \"$?\" -gt 2; then\n  exit 0\nfi";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */

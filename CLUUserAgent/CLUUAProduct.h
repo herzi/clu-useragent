@@ -26,10 +26,11 @@
  
  @param name The name of the product.
  @param version The version of the product (optional).
+ @param weight The weight for the product.
  
  @availability CLUUserAgent (0.3.0 and later)
  */
-- (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version;
+- (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version weight:(NSUInteger)weight;
 
 /**
  Initialize a product component with a comment.
@@ -42,9 +43,10 @@
  @param name The name of the product.
  @param version The version of the product (optional).
  @param comment The comment for the product (optional).
+ @param weight The weight for the product.
  
  @availability CLUUserAgent (0.3.0 and later).
  */
-- (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version comment:(nullable NSString*)comment;
+- (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version comment:(nullable NSString*)comment weight:(NSUInteger)weight;
 
 @end
