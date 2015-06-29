@@ -10,7 +10,7 @@
 
 #import <CLUUserAgent/CLUUserAgent.h>
 
-#ifdef TARGET_OS_MAC
+#if TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR
 #import <Cocoa/Cocoa.h>
 #endif
 
@@ -66,7 +66,7 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
 
 #pragma mark- Methods:
 
-#pragma mark +defaultOptions
+#pragma mark • +defaultOptions
 
 - (nonnull NSString*)describeOptions:(CLUUserAgentOptions)options
 {
@@ -113,7 +113,7 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
                    [self describeOptions:expected]);
 }
 
-#pragma mark -init
+#pragma mark • -init
 
 - (void)testInit
 {
@@ -143,6 +143,44 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
         
         // then
         XCTAssertEqual(sut.options, options[i], @"(i = %lu)", i);
+    }
+}
+
+#pragma mark • -addComponent
+
+- (void) testAddComponent
+{
+    uint32_t random = arc4random();
+    NSString* name = [NSString stringWithFormat:@"%08X", random];
+    NSString* kPrefix = @"prefix";
+    NSString* kSuffix = @"suffix";
+    NSDictionary* tests = @{@(CLUUAComponentWeightApplication + 1): kPrefix,
+                            @(CLUUAComponentWeightApplication - 1): [NSString stringWithFormat:@" %@ MyFramework", name],
+                            @(CLUUAComponentWeightFramework - 1):   [NSString stringWithFormat:@" %@ CFNetwork", name],
+                            @(CLUUAComponentWeightTransport - 1):   [NSString stringWithFormat:@" %@ Darwin", name],
+                            @(CLUUAComponentWeightKernel - 1):      [NSString stringWithFormat:@" %@ (", name],
+                            @(CLUUAComponentWeightDeviceModel - 1): kSuffix};
+    
+    for (NSNumber* test in tests) {
+        // given
+        CLUUAProduct* product = [[CLUUAProduct alloc] initWithStringValue:name weight:test.unsignedIntegerValue];
+        sut = [[CLUUserAgent alloc] initWithOptions:CLUUserAgentOptionsAddDeviceModel];
+        [sut addComponent:[[CLUUAProduct alloc] initWithName:@"MyFramework" version:nil weight:CLUUAComponentWeightFramework]];
+        
+        // when
+        [sut addComponent:product];
+        
+        // then
+        if ([kPrefix isEqualToString:tests[test]]) {
+            XCTAssertTrue([sut.stringValue hasPrefix:[name stringByAppendingString:@" "]]);
+        } else if ([kSuffix isEqualToString:tests[test]]) {
+            XCTAssertTrue([sut.stringValue hasSuffix:[@") " stringByAppendingString:name]]);
+        } else {
+            XCTAssertTrue([sut.stringValue containsString:tests[test]],
+                          @"Expected to find “%@” in “%@” but it wasn't found (weight: %lu).",
+                          tests[test], sut.stringValue,
+                          test.unsignedIntegerValue);
+        }
     }
 }
 

@@ -17,7 +17,8 @@
 // HTTP 1.1 => Headers => User-Agent: http://www.w3.org/Protocols/rfc2616/rfc2616-sec14.html#sec14.43
 
 @interface CLUUserAgent () {
-    NSMutableArray* __nonnull _components;
+    NSMutableOrderedSet* __nonnull _components;
+    NSArray/*<NSSortDescriptor*>*/ * __nonnull _sortDescriptors;
 }
 
 @property CLUUserAgentOptions options;
@@ -64,10 +65,15 @@
 
 #pragma mark: User-Agent Generator
 
+// FIXME: Consider returning an enumerator here.
 - (nonnull NSArray*) components
 {
     if (!_components) {
-        NSMutableArray* components = [NSMutableArray array];
+        NSSortDescriptor* sortByWeight = [NSSortDescriptor sortDescriptorWithKey:@"weight" ascending:NO];
+        NSSortDescriptor* sortByStringValue = [NSSortDescriptor sortDescriptorWithKey:@"stringValue" ascending:YES];
+        _sortDescriptors = @[sortByWeight, sortByStringValue];
+        
+        NSMutableOrderedSet* components = [NSMutableOrderedSet orderedSet];
         [components addObject:[self __productForApplication]];
         [components addObject:[self __productForCFNetwork]];
         [components addObject:[self __productForKernel]];
@@ -76,10 +82,23 @@
             [components addObject:[self __commentForModel]];
         }
         
+        [components sortUsingDescriptors:_sortDescriptors];
+        
         _components = components;
     }
     
-    return [_components copy];
+    return [_components objectEnumerator].allObjects;
+}
+
+- (void) addComponent:(nonnull CLUUAComponent*)component
+{
+    if (!_components) {
+        [self components];
+    }
+    
+    // TODO: Once this becomes too slow: Calculate the index like git-bisect, then insert directly at the target position.
+    [_components addObject:component];
+    [_components sortUsingDescriptors:_sortDescriptors];
 }
 
 - (nonnull NSString*) stringValue

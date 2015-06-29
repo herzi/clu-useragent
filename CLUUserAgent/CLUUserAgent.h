@@ -92,6 +92,15 @@ CLU_PUBLIC_CLASS @interface CLUUserAgent : NSObject
 @property (copy, readonly) NSArray/*<CLUUAComponent>*/ *__nonnull components;
 
 /**
+ Add a component to a User-Agent.
+ 
+ @param component The component to add to the User-Agent.
+ 
+ @availability CLUUserAgent (0.3.0 and later)
+ */
+- (void) addComponent:(nonnull CLUUAComponent*)component;
+
+/**
  Get the options used to create this User-Agent.
  
  @availability CLUUserAgent (0.3.0 and later)
