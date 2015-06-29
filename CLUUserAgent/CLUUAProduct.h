@@ -13,6 +13,8 @@
  
  Product components are used to describe applications, frameworks and operating
  systems within a User-Agent.
+ 
+ @availability CLUUserAgent (0.3.0 and later)
  */
 @interface CLUUAProduct : CLUUAComponent
 
@@ -24,6 +26,8 @@
  
  @param name The name of the product.
  @param version The version of the product (optional).
+ 
+ @availability CLUUserAgent (0.3.0 and later)
  */
 - (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version;
 

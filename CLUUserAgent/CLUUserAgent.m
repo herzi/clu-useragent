@@ -110,10 +110,7 @@
     modelBuffer[sz] = 0;
     
     NSString* model = [NSString stringWithCString:modelBuffer encoding:NSASCIIStringEncoding];
-    model = [model stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
-    model = [model stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
-    model = [NSString stringWithFormat:@"(%@)", model];
-    return [[CLUUAComponent alloc] initWithStringValue:model];
+    return [[CLUUAComment alloc] initWithText:model];
 }
 
 - (nonnull CLUUAComponent*) __commentForOSArch
@@ -129,7 +126,8 @@
         }
     }
     
-    return [[CLUUAComponent alloc] initWithStringValue:[NSString stringWithFormat:@"(%s)", name.machine]];
+    NSString* text = [NSString stringWithCString:name.machine encoding:NSASCIIStringEncoding];
+    return [[CLUUAComment alloc] initWithText:text];
 }
 
 - (nonnull CLUUAComponent*) __productForApplication

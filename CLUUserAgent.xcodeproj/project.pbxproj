@@ -48,6 +48,10 @@
 		CF136C551B41768D0037FFA8 /* CLUUAProduct.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C521B41768D0037FFA8 /* CLUUAProduct.h */; };
 		CF136C561B41768D0037FFA8 /* CLUUAProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C531B41768D0037FFA8 /* CLUUAProduct.m */; };
 		CF136C571B41768D0037FFA8 /* CLUUAProduct.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C531B41768D0037FFA8 /* CLUUAProduct.m */; };
+		CF136C5A1B4179750037FFA8 /* CLUUAComment.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C581B4179750037FFA8 /* CLUUAComment.h */; };
+		CF136C5B1B4179750037FFA8 /* CLUUAComment.h in Headers */ = {isa = PBXBuildFile; fileRef = CF136C581B4179750037FFA8 /* CLUUAComment.h */; };
+		CF136C5C1B4179750037FFA8 /* CLUUAComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C591B4179750037FFA8 /* CLUUAComment.m */; };
+		CF136C5D1B4179750037FFA8 /* CLUUAComment.m in Sources */ = {isa = PBXBuildFile; fileRef = CF136C591B4179750037FFA8 /* CLUUAComment.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -160,6 +164,8 @@
 		CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUAComponent.m; sourceTree = "<group>"; };
 		CF136C521B41768D0037FFA8 /* CLUUAProduct.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUUAProduct.h; sourceTree = "<group>"; };
 		CF136C531B41768D0037FFA8 /* CLUUAProduct.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUAProduct.m; sourceTree = "<group>"; };
+		CF136C581B4179750037FFA8 /* CLUUAComment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUUAComment.h; sourceTree = "<group>"; };
+		CF136C591B4179750037FFA8 /* CLUUAComment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUUAComment.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -319,6 +325,8 @@
 			isa = PBXGroup;
 			children = (
 				CF136C231B4007270037FFA8 /* CLUMacros.h */,
+				CF136C581B4179750037FFA8 /* CLUUAComment.h */,
+				CF136C591B4179750037FFA8 /* CLUUAComment.m */,
 				CF136C4B1B4152210037FFA8 /* CLUUAComponent.h */,
 				CF136C4C1B4152210037FFA8 /* CLUUAComponent.m */,
 				CF136C521B41768D0037FFA8 /* CLUUAProduct.h */,
@@ -375,6 +383,7 @@
 				CF086BDA1B40767E00955A31 /* CLUVersion.h in Headers */,
 				CF136C541B41768D0037FFA8 /* CLUUAProduct.h in Headers */,
 				CF136C281B4007270037FFA8 /* CLUUserAgent.h in Headers */,
+				CF136C5A1B4179750037FFA8 /* CLUUAComment.h in Headers */,
 				CF136C261B4007270037FFA8 /* CLUMacros.h in Headers */,
 				CF136C4D1B4152210037FFA8 /* CLUUAComponent.h in Headers */,
 			);
@@ -387,6 +396,7 @@
 				CF086BDB1B40767F00955A31 /* CLUVersion.h in Headers */,
 				CF136C551B41768D0037FFA8 /* CLUUAProduct.h in Headers */,
 				CF136C291B4007270037FFA8 /* CLUUserAgent.h in Headers */,
+				CF136C5B1B4179750037FFA8 /* CLUUAComment.h in Headers */,
 				CF136C271B4007270037FFA8 /* CLUMacros.h in Headers */,
 				CF136C4E1B4152210037FFA8 /* CLUUAComponent.h in Headers */,
 			);
@@ -658,6 +668,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C5C1B4179750037FFA8 /* CLUUAComment.m in Sources */,
 				CF136C561B41768D0037FFA8 /* CLUUAProduct.m in Sources */,
 				CF136C2A1B4007270037FFA8 /* CLUUserAgent.m in Sources */,
 				CF136C4F1B4152210037FFA8 /* CLUUAComponent.m in Sources */,
@@ -689,6 +700,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF136C5D1B4179750037FFA8 /* CLUUAComment.m in Sources */,
 				CF136C571B41768D0037FFA8 /* CLUUAProduct.m in Sources */,
 				CF136C2B1B4007270037FFA8 /* CLUUserAgent.m in Sources */,
 				CF136C501B4152210037FFA8 /* CLUUAComponent.m in Sources */,

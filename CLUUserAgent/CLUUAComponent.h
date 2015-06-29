@@ -21,6 +21,8 @@
  is composed from the product “Googlebot/2.1” and the comment
  “(+http://www.google.com/bot.html)”. These products and comments are considered
  User-Agent components.
+ 
+ @availability CLUUserAgent (0.3.0 and later)
  */
 @interface CLUUAComponent : NSObject
 
@@ -39,5 +41,17 @@
  @availability CLUUserAgent (0.3.0 and later)
  */
 @property (copy, readonly) NSString* __nonnull stringValue;
+
+/**
+ Escape a string to represent a token in a User-Agent.
+ 
+ Many strings my not include spaces, escape these strings so they conform to the
+ specification.
+ 
+ @param input The input to be escaped.
+ 
+ @availability CLUUserAgent (0.3.0 and later)
+ */
+- (nonnull NSString*) escapeString:(nonnull NSString*)input;
 
 @end

@@ -30,4 +30,10 @@
     return self;
 }
 
+- (nonnull NSString*) escapeString:(nonnull NSString*)input
+{
+    input = [input stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    return [input stringByReplacingOccurrencesOfString:@"," withString:@"%2C"];
+}
+
 @end
