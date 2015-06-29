@@ -138,20 +138,13 @@
     }
 #endif
     
-    return [self __productForBundle:main weight:CLUUAComponentWeightApplication];
-}
-
-- (nonnull CLUUAComponent*) __productForBundle:(nonnull NSBundle*)bundle weight:(NSUInteger)weight
-{
-    NSString* bundleName = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
-    NSString* bundleVersion = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
-    
-    return [[CLUUAProduct alloc] initWithName:bundleName version:bundleVersion weight:weight];
+    return [[CLUUAProduct alloc] initWithBundle:main weight:CLUUAComponentWeightApplication];
 }
 
 - (nonnull CLUUAComponent*) __productForCFNetwork
 {
-    return [self __productForBundle:[NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"] weight:CLUUAComponentWeightTransport];
+    NSBundle* bundle = [NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"];
+    return [[CLUUAProduct alloc] initWithBundle:bundle weight:CLUUAComponentWeightTransport];
 }
 
 - (nonnull CLUUAComponent*) __productForKernel

@@ -31,4 +31,12 @@
     return [self initWithStringValue:stringValue weight:weight];
 }
 
+- (nonnull instancetype) initWithBundle:(nonnull NSBundle*)bundle weight:(NSUInteger)weight
+{
+    NSString* bundleName = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
+    NSString* bundleVersion = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
+    
+    return [self initWithName:bundleName version:bundleVersion weight:weight];
+}
+
 @end

@@ -49,4 +49,16 @@
  */
 - (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version comment:(nullable NSString*)comment weight:(NSUInteger)weight;
 
+/**
+ Initialize a product component with a bundle.
+ 
+ Using this initializer will result in a CLUUAComponent for the specified
+ bundle.
+ 
+ @param bundle The bundle to generate the User-Agent product for.
+ @param weight The weight of the product. Used to determine the position in the
+ final User-Agent.
+ */
+- (nonnull instancetype) initWithBundle:(nonnull NSBundle*)bundle weight:(NSUInteger)weight;
+
 @end
