@@ -10,6 +10,10 @@
 
 #import <CLUUserAgent/CLUUserAgent.h>
 
+#ifdef TARGET_OS_MAC
+#import <Cocoa/Cocoa.h>
+#endif
+
 #import "CLUTestServer.h"
 
 typedef void (^CancellationBlock) (void);
@@ -64,6 +68,25 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
 
 #pragma mark +defaultOptions
 
+- (nonnull NSString*)describeOptions:(CLUUserAgentOptions)options
+{
+    NSMutableArray* components = [NSMutableArray array];
+    
+    if (options & CLUUserAgentOptionsAddOSArchitecture) {
+        [components addObject:@"CLUUserAgentOptionsAddOSArchitecture"];
+    }
+    
+    if (options & CLUUserAgentOptionsAddDeviceModel) {
+        [components addObject:@"CLUUserAgentOptionsAddDeviceModel"];
+    }
+    
+    if (!components.firstObject) {
+        [components addObject:@"CLUUserAgentOptionsNone"];
+    }
+    
+    return [components componentsJoinedByString:@","];
+}
+
 - (void) testDefaultOptions
 {
     // given
@@ -71,9 +94,10 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
 #if TARGET_OS_MAC && !TARGET_IPHONE_SIMULATOR
     expected |= CLUUserAgentOptionsAddOSArchitecture;
     
-    BOOL osxBeforeTenTen = YES;
 #ifdef NSAppKitVersionNumber10_10
-    osxBeforeTenTen = NSAppKitVersionNumber < NSAppKitVersionNumber10_10;
+    BOOL osxBeforeTenTen = NSAppKitVersionNumber < NSAppKitVersionNumber10_10;
+#else
+    BOOL osxBeforeTenTen = YES; // FIXME: This fails when the code is compiled in 10.9 and run on 10.10.
 #endif
     if (osxBeforeTenTen) {
         expected |= CLUUserAgentOptionsAddDeviceModel;
@@ -84,7 +108,9 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
     CLUUserAgentOptions result = [CLUUserAgent defaultOptions];
     
     // then
-    XCTAssertEqual(result, expected);
+    XCTAssertEqual(result, expected, @"result(%@) ≠ expected(%@)",
+                   [self describeOptions:result],
+                   [self describeOptions:expected]);
 }
 
 #pragma mark -init

@@ -17,4 +17,4 @@ FOUNDATION_EXPORT int CLUUserAgentVersionMinor;
 FOUNDATION_EXPORT int CLUUserAgentVersionMicro;
 
 //! Project version string for CLUUserAgent.
-FOUNDATION_EXPORT const char CLUUserAgentVersionString[];
+FOUNDATION_EXPORT const char CLUUserAgentVersionText[];

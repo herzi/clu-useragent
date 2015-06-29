@@ -39,7 +39,7 @@
     NSString* bundleVersion = [bundle objectForInfoDictionaryKey:@"CFBundleShortVersionString"];
     
     // when
-    NSString* result = [NSString stringWithCString:CLUUserAgentVersionString encoding:NSUTF8StringEncoding];
+    NSString* result = [NSString stringWithCString:CLUUserAgentVersionText encoding:NSUTF8StringEncoding];
     
     // then
     XCTAssertEqualObjects(result, bundleVersion);
@@ -50,7 +50,7 @@
 - (void) testVersionStringMatchesComponents
 {
     // given
-    NSString* versionString = [NSString stringWithCString:CLUUserAgentVersionString encoding:NSUTF8StringEncoding];
+    NSString* versionString = [NSString stringWithCString:CLUUserAgentVersionText encoding:NSUTF8StringEncoding];
     
     // when
     NSString* result = [NSString stringWithFormat:@"%u.%u.%u",

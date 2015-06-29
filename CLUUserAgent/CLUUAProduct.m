@@ -12,14 +12,23 @@
 
 - (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version
 {
-    name = [self escapeString:name];
+    return [self initWithName:name version:version comment:nil];
+}
+
+- (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version comment:(nullable NSString*)comment
+{
+    NSString* stringValue = [self escapeString:name];
     
-    if (!version) {
-        return [self initWithStringValue:name];
+    if (version) {
+        version = [self escapeString:version];
+        stringValue = [stringValue stringByAppendingFormat:@"/%@", version];
     }
     
-    version = [self escapeString:version];
-    return [self initWithStringValue:[NSString stringWithFormat:@"%@/%@", name, version]];
+    if (comment) {
+        stringValue = [stringValue stringByAppendingFormat:@" (%@)", comment];
+    }
+    
+    return [self initWithStringValue:stringValue];
 }
 
 @end

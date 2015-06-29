@@ -92,7 +92,6 @@
     for (CLUUAComponent* component in self.components) {
         [strings addObject:component.stringValue];
     }
-    
     return [strings componentsJoinedByString:@" "];
 }
 
@@ -137,7 +136,7 @@
 #if TARGET_OS_MAC
     // When runnig unit tests, this won't work via the main bundle.
     if (!main.bundleIdentifier && [NSBundle bundleWithIdentifier:@"com.apple.dt.XCTest"].loaded) {
-        return [[CLUUAComponent alloc] initWithStringValue:@"xctest (unknown version)"];
+        return [[CLUUAProduct alloc] initWithName:@"xctest" version:nil comment:@"unknown version"];
     }
 #endif
     

@@ -13,4 +13,4 @@ int CLUUserAgentVersionMajor = 0;
 int CLUUserAgentVersionMinor = 3;
 int CLUUserAgentVersionMicro = 0;
 
-const char CLUUserAgentVersionString[] = "0.3.0";
+const char CLUUserAgentVersionText[] = "0.3.0";

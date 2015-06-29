@@ -31,4 +31,20 @@
  */
 - (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version;
 
+/**
+ Initialize a product component with a comment.
+ 
+ Using this initializer will result in a [CLUUAComponent stringValue] of “name
+ (comment)” (if no version was supplied) or “name/version (comment)”
+ (otherwise). Using nil as a value for comment will result in a string described
+ in initWithName:version:.
+ 
+ @param name The name of the product.
+ @param version The version of the product (optional).
+ @param comment The comment for the product (optional).
+ 
+ @availability CLUUserAgent (0.3.0 and later).
+ */
+- (nonnull instancetype) initWithName:(nonnull NSString*)name version:(nullable NSString*)version comment:(nullable NSString*)comment;
+
 @end
