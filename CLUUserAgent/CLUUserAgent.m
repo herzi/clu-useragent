@@ -70,11 +70,7 @@
         NSMutableArray* components = [NSMutableArray array];
         [components addObject:[self __productForApplication]];
         [components addObject:[self __productForCFNetwork]];
-        [components addObject:[self __productForOS]];
-        
-        if (self.options & CLUUserAgentOptionsAddOSArchitecture) {
-            [components addObject:[self __commentForOSArch]];
-        }
+        [components addObject:[self __productForKernel]];
         
         if (self.options & CLUUserAgentOptionsAddDeviceModel) {
             [components addObject:[self __commentForModel]];
@@ -112,23 +108,6 @@
     return [[CLUUAComment alloc] initWithText:model];
 }
 
-- (nonnull CLUUAComponent*) __commentForOSArch
-{
-    struct utsname name;
-    memset(&name, 0, sizeof(name));
-    if (0 > uname(&name)) {
-        switch (errno) {
-            case ESRCH: // No such process.
-            default:
-                NSAssert(NO, @"uname(3) failed: %s", strerror(errno));
-                break;
-        }
-    }
-    
-    NSString* text = [NSString stringWithCString:name.machine encoding:NSASCIIStringEncoding];
-    return [[CLUUAComment alloc] initWithText:text];
-}
-
 - (nonnull CLUUAComponent*) __productForApplication
 {
     NSBundle* main = [NSBundle mainBundle];
@@ -156,7 +135,7 @@
     return [self __productForBundle:[NSBundle bundleWithIdentifier:@"com.apple.CFNetwork"]];
 }
 
-- (nonnull CLUUAComponent*) __productForOS
+- (nonnull CLUUAComponent*) __productForKernel
 {
     struct utsname name;
     memset(&name, 0, sizeof(name));
@@ -169,8 +148,14 @@
         }
     }
     
+    NSString* comment = nil;
+    if (self.options & CLUUserAgentOptionsAddOSArchitecture) {
+        comment = [NSString stringWithCString:name.machine encoding:NSASCIIStringEncoding];
+    }
+    
     return [[CLUUAProduct alloc] initWithName:[NSString stringWithCString:name.sysname encoding:NSASCIIStringEncoding]
-                                      version:[NSString stringWithCString:name.release encoding:NSASCIIStringEncoding]];
+                                      version:[NSString stringWithCString:name.release encoding:NSASCIIStringEncoding]
+                                      comment:comment];
 }
 
 #pragma mark- Deprecated Methods
