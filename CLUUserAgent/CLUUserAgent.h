@@ -83,6 +83,13 @@ typedef NS_OPTIONS(NSUInteger, CLUUserAgentOptions) {
 /// @name Getting the User-Agent configuration
 
 /**
+ Get the components constituting the User-Agent.
+ 
+ @availability CLUUserAgent (0.3.0 and later)
+ */
+@property (copy, readonly) NSArray/*<CLUUAComponent>*/ *__nonnull components;
+
+/**
  Get the options used to create this User-Agent.
  
  @availability CLUUserAgent (0.3.0 and later)
