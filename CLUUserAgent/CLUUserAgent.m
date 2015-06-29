@@ -151,7 +151,7 @@
     NSString* bundleName = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleNameKey];
     NSString* bundleVersion = [bundle objectForInfoDictionaryKey:(__bridge NSString*)kCFBundleVersionKey];
     
-    return [[CLUUAComponent alloc] initWithStringValue:[NSString stringWithFormat:@"%@/%@", bundleName, bundleVersion]];
+    return [[CLUUAProduct alloc] initWithName:bundleName version:bundleVersion];
 }
 
 - (nonnull CLUUAComponent*) __productForCFNetwork
@@ -172,7 +172,8 @@
         }
     }
     
-    return [[CLUUAComponent alloc] initWithStringValue:[NSString stringWithFormat:@"%s/%s", name.sysname, name.release]];
+    return [[CLUUAProduct alloc] initWithName:[NSString stringWithCString:name.sysname encoding:NSASCIIStringEncoding]
+                                      version:[NSString stringWithCString:name.release encoding:NSASCIIStringEncoding]];
 }
 
 #pragma mark- Deprecated Methods

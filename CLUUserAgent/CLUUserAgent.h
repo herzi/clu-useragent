@@ -12,6 +12,7 @@
  * using statements like #import <CLUUserAgent/PublicHeader.h> */
 
 #import <CLUUserAgent/CLUUAComponent.h>
+#import <CLUUserAgent/CLUUAProduct.h>
 #import <CLUUserAgent/CLUVersion.h>
 
 /**
