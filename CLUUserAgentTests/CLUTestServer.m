@@ -218,6 +218,9 @@
 - (void) __acceptConnection:(NSFileHandle*)connection
 {
     CLU_WEAKEN(self);
+    
+#warning FIXME: What is the difference between NSFileHandleDataAvailableNotification and NSFileHandleReadCompletionNotification?
+#warning FIXME: Consider adding NSFileHandleReadToEndOfFileCompletionNotification for cleanup.
     id<NSObject> observer = [self.notificationCenter addObserverForName:NSFileHandleReadCompletionNotification object:connection queue:[NSOperationQueue mainQueue] usingBlock:^(NSNotification *notification) {
         CLU_STRENGTHEN(self);
         NSData* data = notification.userInfo[NSFileHandleNotificationDataItem];
@@ -239,6 +242,15 @@
     
     if (!CFHTTPMessageIsHeaderComplete(request)) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Wait for more data.)" userInfo:nil];
+    }
+    
+    CFDataRef requestBody = CFHTTPMessageCopyBody(request);
+    if (!requestBody) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
+    }
+    
+    if (0 < CFDataGetLength(requestBody)) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }
     
     NSURL* requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(request);
@@ -273,6 +285,11 @@
     NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response);
     [connection writeData:responseData];
     [connection closeFile];
+    
+#warning FIXME: Check the specifications whether this is correct, then implement the correct way: HTTP 1.0 defaults to "close" and 1.1 to "keep-alive"?
+    if ([kHTTPHeaderValueConnectionKeepAlive isEqualToString:allHTTPHeaderFields[kHTTPHeaderNameConnection]]) {
+        return;
+    }
     
     for (CLUTestServerSocket* socket in self.observers) {
         if (socket.fileHandle == connection) {

@@ -9,14 +9,20 @@
 #import "CLUHTTPMessage.h"
 
 // TODO: When porting to Swift, these can become a String-based enumeration.
+NSString* const kHTTPHeaderNameConnection = @"Connection";
 NSString* const kHTTPHeaderNameContentLength = @"Content-Length";
 NSString* const kHTTPHeaderNameUserAgent = @"User-Agent";
+
+// TODO: When porting to Swift, these can become a String-based enumeration.
+NSString* const kHTTPHeaderValueConnectionKeepAlive = @"keep-alive";
+
 /* TODO: When porting to Swift, this can become an enum:
  * enum HTTPStatus : (Int, String) {
  *   case OK(200, "OK")
  * }
  */
 NSUInteger const kHTTPStatusCodeOK = 200;
+
 static NSDictionary* kHTTPStatusMessages = nil;
 
 @interface CLUHTTPMessage ()

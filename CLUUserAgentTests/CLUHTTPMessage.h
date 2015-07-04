@@ -11,8 +11,11 @@
 
 NS_ASSUME_NONNULL_BEGIN
 
+extern NSString* const kHTTPHeaderNameConnection;
 extern NSString* const kHTTPHeaderNameContentLength;
 extern NSString* const kHTTPHeaderNameUserAgent;
+
+extern NSString* const kHTTPHeaderValueConnectionKeepAlive;
 
 extern NSUInteger const kHTTPStatusCodeOK;
 
