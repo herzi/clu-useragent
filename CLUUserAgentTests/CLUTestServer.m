@@ -13,12 +13,35 @@
 @import Darwin.POSIX.netinet.in; // struct sockaddr_in6
 @import Darwin.POSIX.sys.socket; // socket()
 
+// TODO: When porting to Swift, these can become a String-based enumeration.
+static NSString* const kHTTPHeaderNameContentLength = @"Content-Length";
+static NSString* const kHTTPHeaderNameUserAgent = @"User-Agent";
+/* TODO: When porting to Swift, this can become an enum:
+ * enum HTTPStatus : (Int, String) {
+ *   case OK(200, "OK")
+ * }
+ */
+static CFIndex const kHTTPStatusCodeOK = 200;
+static NSDictionary* kHTTPStatusMessages = nil;
+
 // A simple wrapper around NSFileHandle implementing NSCopying
 @interface CLUTestServerSocket : NSObject<NSCopying>
 @property (nonnull) NSFileHandle* fileHandle;
 @end
 
 @implementation CLUTestServerSocket
+
++ (void)initialize
+{
+    static dispatch_once_t onceToken;
+    
+    [super initialize];
+    
+    dispatch_once(&onceToken, ^{
+        kHTTPStatusMessages = @{@(kHTTPStatusCodeOK): @"OK"};
+    });
+}
+
 + (instancetype) socketWithFileHandle:(NSFileHandle*)fileHandle
 {
     return [[self alloc] initWithFileHandle:fileHandle];
@@ -226,30 +249,49 @@
 
 - (void) __connection:(NSFileHandle*)connection hasData:(NSData*)data
 {
-    NSString* d = [[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding];
-    NSArray* lines = [d componentsSeparatedByString:@"\r\n"];
-    
-    NSString* userAgent = nil;
-    NSString* uaPrefix = @"User-Agent: ";
-    for (NSString* line in lines) {
-        if ([line hasPrefix:uaPrefix]) {
-            userAgent = [line substringFromIndex:uaPrefix.length];
+    CFHTTPMessageRef request = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES /* isRequest */);
+    [data enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
+        BOOL success = CFHTTPMessageAppendBytes(request, bytes, byteRange.length);
+        if (!success) {
+            @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Create and propagate error.)" userInfo:nil];
         }
+    }];
+    
+    if (!CFHTTPMessageIsHeaderComplete(request)) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Wait for more data.)" userInfo:nil];
     }
     
+    NSURL* requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(request);
+    if (![@"/" isEqualToString:requestURL.path]) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 404 reply.)" userInfo:nil];
+    }
+    
+    NSDictionary* allHTTPHeaderFields = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(request);
+    NSString* userAgent = allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Return 400" userInfo:nil];
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 400 reply telling the client to send a User-Agent header.)" userInfo:nil];
     }
     
-    NSMutableArray* response = [NSMutableArray array];
-    NSAssert([lines.firstObject hasSuffix:@" HTTP/1.1"], nil);
-    [response addObject:@"HTTP/1.1 200 OK"];
-    [response addObject:[NSString stringWithFormat:@"Content-Length: %lu", (unsigned long)[userAgent lengthOfBytesUsingEncoding:NSUTF8StringEncoding]]];
-    [response addObject:@""]; // Header Complete
-    [response addObject:userAgent];
-    [response addObject:@""]; // Body Complete
-    NSString* reply = [response componentsJoinedByString:@"\r\n"];
-    [connection writeData:[reply dataUsingEncoding:NSUTF8StringEncoding]];
+    // Bridge the result so we don't have to worry about memory management anymore.
+    NSString* httpVersion = (__bridge_transfer NSString*)CFHTTPMessageCopyVersion(request);
+    if (!httpVersion ) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
+    }
+    
+    CFIndex statusCode = kHTTPStatusCodeOK;
+    CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
+                                                            statusCode,
+                                                            (__bridge CFStringRef)kHTTPStatusMessages[@(statusCode)],
+                                                            (__bridge CFStringRef)httpVersion);
+    NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:userAgent.length];
+    CFHTTPMessageSetHeaderFieldValue(response,
+                                     (__bridge CFStringRef)kHTTPHeaderNameContentLength,
+                                     (__bridge CFStringRef)contentLength.stringValue);
+#warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
+    NSData* responseBody = [userAgent dataUsingEncoding:NSASCIIStringEncoding];
+    CFHTTPMessageSetBody(response, (__bridge CFDataRef)responseBody);
+    NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response);
+    [connection writeData:responseData];
     [connection closeFile];
     
     for (CLUTestServerSocket* socket in self.observers) {
