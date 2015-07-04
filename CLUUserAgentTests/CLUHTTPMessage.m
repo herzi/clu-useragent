@@ -25,6 +25,8 @@ NSString* const kHTTPMethodGet = @"GET";
  */
 NSUInteger const kHTTPStatusCodeOK = 200;
 
+NSString* const kHTTPVersion1_1 = @"HTTP/1.1";
+
 static NSDictionary* kHTTPStatusMessages = nil;
 
 NS_ASSUME_NONNULL_BEGIN

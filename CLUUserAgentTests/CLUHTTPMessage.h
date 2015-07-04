@@ -21,6 +21,8 @@ extern NSString* const kHTTPMethodGet;
 
 extern NSUInteger const kHTTPStatusCodeOK;
 
+extern NSString* const kHTTPVersion1_1;
+
 @interface CLUHTTPMessage : NSObject
 
 + (instancetype) messageForEmptyRequest;

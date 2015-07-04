@@ -257,11 +257,11 @@
     NSDictionary* allHTTPHeaderFields = request.allHTTPHeaderFields;
     NSString* userAgent = allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 400 reply telling the client to send a User-Agent header.)" userInfo:nil];
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request“, telling the client to send a User-Agent header.)" userInfo:nil];
     }
     
-    if (!request.HTTPVersion) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
+    if (![kHTTPVersion1_1 isEqualToString:request.HTTPVersion]) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “505 HTTP Version Not Supported”.)" userInfo:nil];
     }
     
     CFIndex statusCode = kHTTPStatusCodeOK;
