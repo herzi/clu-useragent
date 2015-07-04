@@ -62,7 +62,7 @@ NS_ASSUME_NONNULL_END
 
 - (nonnull NSData *)body
 {
-    NSAssert(CFHTTPMessageIsHeaderComplete(self.underlyingMessage), nil);
+    NSAssert(self.headerComplete, nil);
     
 #warning FIXME: Use -[CLUHTTPMessage valueForHTTPHeaderField:] here.
     NSString* contentLength = (__bridge_transfer NSString*)CFHTTPMessageCopyHeaderFieldValue(self.underlyingMessage, (__bridge CFStringRef)kHTTPHeaderNameContentLength);
@@ -87,6 +87,11 @@ NS_ASSUME_NONNULL_END
     return result;
 }
 
+- (BOOL)isHeaderComplete
+{
+    return CFHTTPMessageIsHeaderComplete(self.underlyingMessage);
+}
+
 #pragma mark HTTP Parsing
 
 - (NSRange)rangeOfAppendedDataFrom:(nonnull NSData*)data
@@ -104,7 +109,7 @@ NS_ASSUME_NONNULL_END
         CLU_STRENGTHEN(self);
         NSAssert(self, nil);
         
-        if (!CFHTTPMessageIsHeaderComplete(self.underlyingMessage)) {
+        if (!self.headerComplete) {
             // check if we can find the end of the headers in this chunk
             char const* str = bytes;
             char const* pattern = "\r\n\r\n";

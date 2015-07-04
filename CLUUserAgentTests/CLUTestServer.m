@@ -237,7 +237,7 @@
     NSAssert(parsed.location == 0, nil);
     NSAssert(parsed.length == data.length, nil);
     
-    if (!CFHTTPMessageIsHeaderComplete(request.underlyingMessage)) {
+    if (!request.headerComplete) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Persist the request and wait for more data.)" userInfo:nil];
     }
     
