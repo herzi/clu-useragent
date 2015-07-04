@@ -525,7 +525,7 @@
 		CF136B831B4003600037FFA8 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastUpgradeCheck = 0640;
 				TargetAttributes = {
 					CF136B8C1B4003980037FFA8 = {
 						CreatedOnToolsVersion = 6.3.2;
@@ -791,6 +791,7 @@
 				);
 				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
 				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
 			};
 			name = Debug;
 		};
