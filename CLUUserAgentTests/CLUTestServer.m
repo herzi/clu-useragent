@@ -241,8 +241,6 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Persist the request and wait for more data.)" userInfo:nil];
     }
     
-    NSDictionary* allHTTPHeaderFields = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(request.underlyingMessage);
-    NSLog(@"all headers: %@", allHTTPHeaderFields);
     NSData* requestBody = request.body;
     if (!requestBody) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
@@ -257,6 +255,7 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 404 reply.)" userInfo:nil];
     }
     
+    NSDictionary* allHTTPHeaderFields = request.allHTTPHeaderFields;
     NSString* userAgent = allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 400 reply telling the client to send a User-Agent header.)" userInfo:nil];

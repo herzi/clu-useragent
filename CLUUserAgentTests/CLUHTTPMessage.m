@@ -60,6 +60,13 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark Inspecting the Message
 
+- (nonnull NSDictionary*) allHTTPHeaderFields
+{
+    NSDictionary* result = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(self.underlyingMessage);
+    NSAssert(result, nil);
+    return result;
+}
+
 - (nonnull NSData *)body
 {
     NSAssert(self.headerComplete, nil);
