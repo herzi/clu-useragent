@@ -25,7 +25,10 @@ extern NSUInteger const kHTTPStatusCodeOK;
 
 + (NSString*)statusMessageForCode:(NSUInteger)statusCode;
 
+@property (readonly) NSData* body;
 @property (readonly) CFHTTPMessageRef underlyingMessage;
+
+- (NSRange) rangeOfAppendedDataFrom:(NSData*)data;
 
 @end
 

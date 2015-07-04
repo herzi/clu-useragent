@@ -233,23 +233,22 @@
 - (void) __connection:(NSFileHandle*)connection hasData:(NSData*)data
 {
     CLUHTTPMessage* request = [CLUHTTPMessage messageForEmptyRequest];
-    [data enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-        BOOL success = CFHTTPMessageAppendBytes(request.underlyingMessage, bytes, byteRange.length);
-        if (!success) {
-            @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Create and propagate error.)" userInfo:nil];
-        }
-    }];
+    NSRange parsed = [request rangeOfAppendedDataFrom:data];
+    NSAssert(parsed.location == 0, nil);
+    NSAssert(parsed.length == data.length, nil);
     
     if (!CFHTTPMessageIsHeaderComplete(request.underlyingMessage)) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Wait for more data.)" userInfo:nil];
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Persist the request and wait for more data.)" userInfo:nil];
     }
     
-    CFDataRef requestBody = CFHTTPMessageCopyBody(request.underlyingMessage);
+    NSDictionary* allHTTPHeaderFields = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(request.underlyingMessage);
+    NSLog(@"all headers: %@", allHTTPHeaderFields);
+    NSData* requestBody = request.body;
     if (!requestBody) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }
     
-    if (0 < CFDataGetLength(requestBody)) {
+    if (0 < requestBody.length) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }
     
@@ -258,7 +257,6 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 404 reply.)" userInfo:nil];
     }
     
-    NSDictionary* allHTTPHeaderFields = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(request.underlyingMessage);
     NSString* userAgent = allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 400 reply telling the client to send a User-Agent header.)" userInfo:nil];
