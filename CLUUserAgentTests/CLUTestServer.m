@@ -265,19 +265,16 @@
     }
     
     CFIndex statusCode = kHTTPStatusCodeOK;
-    CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
-                                                            statusCode,
-                                                            (__bridge CFStringRef)[CLUHTTPMessage statusMessageForCode:statusCode],
-                                                            (__bridge CFStringRef)request.HTTPVersion);
+    CLUHTTPMessage* response = [CLUHTTPMessage responseWithStatusCode:statusCode HTTPVersion:request.HTTPVersion];
     NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:userAgent.length];
-    CFHTTPMessageSetHeaderFieldValue(response,
+    CFHTTPMessageSetHeaderFieldValue(response.underlyingMessage,
                                      (__bridge CFStringRef)kHTTPHeaderNameContentLength,
                                      (__bridge CFStringRef)contentLength.stringValue);
 #warning FIXME: Set a Content-Type header: text/plain; charset=UTF-8
 #warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
     NSData* responseBody = [userAgent dataUsingEncoding:NSASCIIStringEncoding];
-    CFHTTPMessageSetBody(response, (__bridge CFDataRef)responseBody);
-    NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response);
+    CFHTTPMessageSetBody(response.underlyingMessage, (__bridge CFDataRef)responseBody);
+    NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response.underlyingMessage);
     [connection writeData:responseData];
     [connection closeFile];
     

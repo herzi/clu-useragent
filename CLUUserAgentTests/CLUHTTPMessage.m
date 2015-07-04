@@ -57,8 +57,29 @@ NS_ASSUME_NONNULL_END
 
 + (nonnull instancetype)messageForEmptyRequest
 {
+    CFHTTPMessageRef message = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES);
+    return [[self alloc] __initWithUnderlyingMessage:message];
+}
+
++ (nonnull instancetype)responseWithStatusCode:(NSUInteger)statusCode HTTPVersion:(nonnull NSString*)HTTPVersion
+{
+    return [self responseWithStatusCode:statusCode
+                          statusMessage:[self statusMessageForCode:statusCode]
+                            HTTPVersion:HTTPVersion];
+}
+
++ (nonnull instancetype)responseWithStatusCode:(NSUInteger)statusCode statusMessage:(nonnull NSString*)statusMessage HTTPVersion:(nonnull NSString*)HTTPVersion
+{
+    CFHTTPMessageRef message = CFHTTPMessageCreateResponse(kCFAllocatorDefault, statusCode,
+                                                           (__bridge CFStringRef)statusMessage,
+                                                           (__bridge CFStringRef)HTTPVersion);
+    return [[self alloc] __initWithUnderlyingMessage:message];
+}
+
+- (instancetype) __initWithUnderlyingMessage:(CFHTTPMessageRef)underlyingMessage
+{
     CLUHTTPMessage* result = [[CLUHTTPMessage alloc] init];
-    result.underlyingMessage = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES);
+    result.underlyingMessage = underlyingMessage;
     return result;
 }
 

@@ -26,6 +26,8 @@ extern NSString* const kHTTPVersion1_1;
 @interface CLUHTTPMessage : NSObject
 
 + (instancetype) messageForEmptyRequest;
++ (instancetype) responseWithStatusCode:(NSUInteger)statusCode HTTPVersion:(NSString*)HTTPVersion;
++ (instancetype) responseWithStatusCode:(NSUInteger)statusCode statusMessage:(NSString*)statusMessage HTTPVersion:(NSString*)HTTPVersion;
 
 + (NSString*)statusMessageForCode:(NSUInteger)statusCode;
 
