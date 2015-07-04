@@ -17,6 +17,8 @@ extern NSString* const kHTTPHeaderNameUserAgent;
 
 extern NSString* const kHTTPHeaderValueConnectionKeepAlive;
 
+extern NSString* const kHTTPMethodGet;
+
 extern NSUInteger const kHTTPStatusCodeOK;
 
 @interface CLUHTTPMessage : NSObject
@@ -28,6 +30,7 @@ extern NSUInteger const kHTTPStatusCodeOK;
 @property (readonly) NSDictionary* allHTTPHeaderFields; // NSDictionary<NSString*,NSString*>*
 @property (readonly) NSData* body;
 @property (getter=isHeaderComplete, readonly) BOOL headerComplete;
+@property (readonly) NSString* HTTPMethod;
 @property (readonly) CFHTTPMessageRef underlyingMessage;
 
 - (NSRange) rangeOfAppendedDataFrom:(NSData*)data;

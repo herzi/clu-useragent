@@ -241,13 +241,13 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Persist the request and wait for more data.)" userInfo:nil];
     }
     
-    NSData* requestBody = request.body;
-    if (!requestBody) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
+    if (![kHTTPMethodGet isEqualToString:request.HTTPMethod]) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “405 Method Not Allowed”.)" userInfo:nil];
     }
     
-    if (0 < requestBody.length) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
+    NSData* requestBody = request.body;
+    if (!requestBody || 0 < requestBody.length) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request”)" userInfo:nil];
     }
     
     NSURL* requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(request.underlyingMessage);

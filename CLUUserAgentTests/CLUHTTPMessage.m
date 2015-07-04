@@ -16,6 +16,8 @@ NSString* const kHTTPHeaderNameUserAgent = @"User-Agent";
 // TODO: When porting to Swift, these can become a String-based enumeration.
 NSString* const kHTTPHeaderValueConnectionKeepAlive = @"keep-alive";
 
+NSString* const kHTTPMethodGet = @"GET";
+
 /* TODO: When porting to Swift, this can become an enum:
  * enum HTTPStatus : (Int, String) {
  *   case OK(200, "OK")
@@ -91,6 +93,13 @@ NS_ASSUME_NONNULL_END
     NSAssert(result, nil);
     NSAssert(result.length >= expected, nil);
     
+    return result;
+}
+
+- (nonnull NSString*)HTTPMethod
+{
+    NSString* result = (__bridge_transfer NSString*)CFHTTPMessageCopyRequestMethod(self.underlyingMessage);
+    NSAssert(result, nil);
     return result;
 }
 
