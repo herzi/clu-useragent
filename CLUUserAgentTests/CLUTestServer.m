@@ -245,8 +245,7 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “405 Method Not Allowed”.)" userInfo:nil];
     }
     
-    NSData* requestBody = request.body;
-    if (!requestBody || 0 < requestBody.length) {
+    if (!request.HTTPBody || 0 < request.HTTPBody.length) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request”)" userInfo:nil];
     }
     
@@ -266,13 +265,11 @@
     
     CFIndex statusCode = kHTTPStatusCodeOK;
     CLUHTTPMessage* response = [CLUHTTPMessage responseWithStatusCode:statusCode HTTPVersion:request.HTTPVersion];
-    NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:userAgent.length];
-    CFHTTPMessageSetHeaderFieldValue(response.underlyingMessage,
-                                     (__bridge CFStringRef)kHTTPHeaderNameContentLength,
-                                     (__bridge CFStringRef)contentLength.stringValue);
+    NSData* responseBody = [userAgent dataUsingEncoding:NSASCIIStringEncoding];
+    NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:responseBody.length];
+    [response setValue:contentLength.stringValue forHTTPHeaderField:kHTTPHeaderNameContentLength];
 #warning FIXME: Set a Content-Type header: text/plain; charset=UTF-8
 #warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
-    NSData* responseBody = [userAgent dataUsingEncoding:NSASCIIStringEncoding];
     CFHTTPMessageSetBody(response.underlyingMessage, (__bridge CFDataRef)responseBody);
     NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response.underlyingMessage);
     [connection writeData:responseData];

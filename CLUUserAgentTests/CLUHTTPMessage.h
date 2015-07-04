@@ -32,14 +32,15 @@ extern NSString* const kHTTPVersion1_1;
 + (NSString*)statusMessageForCode:(NSUInteger)statusCode;
 
 @property (readonly) NSDictionary* allHTTPHeaderFields; // NSDictionary<NSString*,NSString*>*
-@property (readonly) NSData* body;
 @property (getter=isHeaderComplete, readonly) BOOL headerComplete;
+@property (readonly) NSData* HTTPBody;
 @property (readonly) NSString* HTTPMethod;
 @property (readonly) NSString* HTTPVersion;
 @property (readonly) CFHTTPMessageRef underlyingMessage;
 @property (readonly) NSURL* URL;
 
 - (NSRange) rangeOfAppendedDataFrom:(NSData*)data;
+- (void) setValue:(NSString*)value forHTTPHeaderField:(NSString*)field;
 
 @end
 

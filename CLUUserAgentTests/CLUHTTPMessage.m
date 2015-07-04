@@ -92,7 +92,7 @@ NS_ASSUME_NONNULL_END
     return result;
 }
 
-- (nonnull NSData *)body
+- (nonnull NSData *)HTTPBody
 {
     NSAssert(self.headerComplete, nil);
     
@@ -143,6 +143,17 @@ NS_ASSUME_NONNULL_END
     NSURL* result = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(self.underlyingMessage);
     NSAssert(result, nil);
     return result;
+}
+
+#pragma mark Mutation
+
+#warning FIXME: Move this into CLUMutableHTTPMessage
+
+- (void) setValue:(nonnull NSString*)value forHTTPHeaderField:(nonnull NSString*)field
+{
+    CFHTTPMessageSetHeaderFieldValue(self.underlyingMessage,
+                                     (__bridge CFStringRef)field,
+                                     (__bridge CFStringRef)value);
 }
 
 #pragma mark HTTP Parsing
