@@ -250,9 +250,8 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request”)" userInfo:nil];
     }
     
-    NSURL* requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(request.underlyingMessage);
-    if (![@"/" isEqualToString:requestURL.path]) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 404 reply.)" userInfo:nil];
+    if (![@"/" isEqualToString:request.URL.path]) {
+        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “404 Not Found”.)" userInfo:nil];
     }
     
     NSDictionary* allHTTPHeaderFields = request.allHTTPHeaderFields;
@@ -261,9 +260,7 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 400 reply telling the client to send a User-Agent header.)" userInfo:nil];
     }
     
-    // Bridge the result so we don't have to worry about memory management anymore.
-    NSString* httpVersion = (__bridge_transfer NSString*)CFHTTPMessageCopyVersion(request.underlyingMessage);
-    if (!httpVersion ) {
+    if (!request.HTTPVersion) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }
     
@@ -271,11 +268,12 @@
     CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
                                                             statusCode,
                                                             (__bridge CFStringRef)[CLUHTTPMessage statusMessageForCode:statusCode],
-                                                            (__bridge CFStringRef)httpVersion);
+                                                            (__bridge CFStringRef)request.HTTPVersion);
     NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:userAgent.length];
     CFHTTPMessageSetHeaderFieldValue(response,
                                      (__bridge CFStringRef)kHTTPHeaderNameContentLength,
                                      (__bridge CFStringRef)contentLength.stringValue);
+#warning FIXME: Set a Content-Type header: text/plain; charset=UTF-8
 #warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
     NSData* responseBody = [userAgent dataUsingEncoding:NSASCIIStringEncoding];
     CFHTTPMessageSetBody(response, (__bridge CFDataRef)responseBody);

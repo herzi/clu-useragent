@@ -31,7 +31,9 @@ extern NSUInteger const kHTTPStatusCodeOK;
 @property (readonly) NSData* body;
 @property (getter=isHeaderComplete, readonly) BOOL headerComplete;
 @property (readonly) NSString* HTTPMethod;
+@property (readonly) NSString* HTTPVersion;
 @property (readonly) CFHTTPMessageRef underlyingMessage;
+@property (readonly) NSURL* URL;
 
 - (NSRange) rangeOfAppendedDataFrom:(NSData*)data;
 

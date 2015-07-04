@@ -103,9 +103,23 @@ NS_ASSUME_NONNULL_END
     return result;
 }
 
+- (nonnull NSString*)HTTPVersion
+{
+    NSString* result = (__bridge_transfer NSString*)CFHTTPMessageCopyVersion(self.underlyingMessage);
+    NSAssert(result, nil);
+    return result;
+}
+
 - (BOOL)isHeaderComplete
 {
     return CFHTTPMessageIsHeaderComplete(self.underlyingMessage);
+}
+
+- (nonnull NSURL*)URL
+{
+    NSURL* result = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(self.underlyingMessage);
+    NSAssert(result, nil);
+    return result;
 }
 
 #pragma mark HTTP Parsing
