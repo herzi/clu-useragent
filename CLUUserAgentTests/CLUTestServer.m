@@ -253,8 +253,7 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “404 Not Found”.)" userInfo:nil];
     }
     
-    NSDictionary* allHTTPHeaderFields = request.allHTTPHeaderFields;
-    NSString* userAgent = allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
+    NSString* userAgent = request.allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request“, telling the client to send a User-Agent header.)" userInfo:nil];
     }
@@ -275,7 +274,7 @@
     [connection closeFile];
     
 #warning FIXME: Check the specifications whether this is correct, then implement the correct way: HTTP 1.0 defaults to "close" and 1.1 to "keep-alive"?
-    if ([kHTTPHeaderValueConnectionKeepAlive isEqualToString:allHTTPHeaderFields[kHTTPHeaderNameConnection]]) {
+    if ([kHTTPHeaderValueConnectionKeepAlive isEqualToString:request.allHTTPHeaderFields[kHTTPHeaderNameConnection]]) {
         return;
     }
     

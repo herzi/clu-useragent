@@ -42,6 +42,8 @@ NS_ASSUME_NONNULL_END
 
 @implementation CLUHTTPMessage
 
+#warning FIXME: Take a look at the CFHTTPMessage API and make sure every feature is covered here.
+
 #pragma mark Life Cycle Management
 
 + (void)initialize
