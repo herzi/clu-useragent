@@ -232,19 +232,19 @@
 
 - (void) __connection:(NSFileHandle*)connection hasData:(NSData*)data
 {
-    CFHTTPMessageRef request = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES /* isRequest */);
+    CLUHTTPMessage* request = [CLUHTTPMessage messageForEmptyRequest];
     [data enumerateByteRangesUsingBlock:^(const void *bytes, NSRange byteRange, BOOL *stop) {
-        BOOL success = CFHTTPMessageAppendBytes(request, bytes, byteRange.length);
+        BOOL success = CFHTTPMessageAppendBytes(request.underlyingMessage, bytes, byteRange.length);
         if (!success) {
             @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Create and propagate error.)" userInfo:nil];
         }
     }];
     
-    if (!CFHTTPMessageIsHeaderComplete(request)) {
+    if (!CFHTTPMessageIsHeaderComplete(request.underlyingMessage)) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Wait for more data.)" userInfo:nil];
     }
     
-    CFDataRef requestBody = CFHTTPMessageCopyBody(request);
+    CFDataRef requestBody = CFHTTPMessageCopyBody(request.underlyingMessage);
     if (!requestBody) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }
@@ -253,19 +253,19 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }
     
-    NSURL* requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(request);
+    NSURL* requestURL = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(request.underlyingMessage);
     if (![@"/" isEqualToString:requestURL.path]) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 404 reply.)" userInfo:nil];
     }
     
-    NSDictionary* allHTTPHeaderFields = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(request);
+    NSDictionary* allHTTPHeaderFields = (__bridge_transfer NSDictionary*)CFHTTPMessageCopyAllHeaderFields(request.underlyingMessage);
     NSString* userAgent = allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Send a 400 reply telling the client to send a User-Agent header.)" userInfo:nil];
     }
     
     // Bridge the result so we don't have to worry about memory management anymore.
-    NSString* httpVersion = (__bridge_transfer NSString*)CFHTTPMessageCopyVersion(request);
+    NSString* httpVersion = (__bridge_transfer NSString*)CFHTTPMessageCopyVersion(request.underlyingMessage);
     if (!httpVersion ) {
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
     }

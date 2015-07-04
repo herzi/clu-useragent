@@ -21,7 +21,11 @@ extern NSUInteger const kHTTPStatusCodeOK;
 
 @interface CLUHTTPMessage : NSObject
 
++ (instancetype) messageForEmptyRequest;
+
 + (NSString*)statusMessageForCode:(NSUInteger)statusCode;
+
+@property (readonly) CFHTTPMessageRef underlyingMessage;
 
 @end
 

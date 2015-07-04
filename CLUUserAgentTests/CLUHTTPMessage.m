@@ -25,9 +25,15 @@ NSUInteger const kHTTPStatusCodeOK = 200;
 
 static NSDictionary* kHTTPStatusMessages = nil;
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CLUHTTPMessage ()
 
+@property CFHTTPMessageRef underlyingMessage;
+
 @end
+
+NS_ASSUME_NONNULL_END
 
 @implementation CLUHTTPMessage
 
@@ -42,6 +48,13 @@ static NSDictionary* kHTTPStatusMessages = nil;
     dispatch_once(&onceToken, ^{
         kHTTPStatusMessages = @{@(kHTTPStatusCodeOK): @"OK"};
     });
+}
+
++ (nonnull instancetype)messageForEmptyRequest
+{
+    CLUHTTPMessage* result = [[CLUHTTPMessage alloc] init];
+    result.underlyingMessage = CFHTTPMessageCreateEmpty(kCFAllocatorDefault, YES);
+    return result;
 }
 
 #pragma mark HTTP Utilities
