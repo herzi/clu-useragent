@@ -9,8 +9,12 @@
 #import <Foundation/Foundation.h>
 #import <CLUUserAgent/CLUMacros.h>
 
+NS_ASSUME_NONNULL_BEGIN
+
 @interface CLUTestServer : NSObject
 
-- (nullable NSURL*) listenAndReturnError:(NSError*__autoreleasing __nullable *__nonnull)error;
+- (nullable NSURL*) listenAndReturnError:(NSError*__autoreleasing*)error;
 
 @end
+
+NS_ASSUME_NONNULL_END

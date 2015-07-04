@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CF05758C1B48261E0081ECBC /* CLUHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05758B1B48261E0081ECBC /* CLUHTTPMessage.m */; };
+		CF05758D1B48261E0081ECBC /* CLUHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05758B1B48261E0081ECBC /* CLUHTTPMessage.m */; };
+		CF05758E1B48261E0081ECBC /* CLUHTTPMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = CF05758B1B48261E0081ECBC /* CLUHTTPMessage.m */; };
 		CF086BDA1B40767E00955A31 /* CLUVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = CF086BD71B40766700955A31 /* CLUVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF086BDB1B40767F00955A31 /* CLUVersion.h in Headers */ = {isa = PBXBuildFile; fileRef = CF086BD71B40766700955A31 /* CLUVersion.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		CF086BDD1B407A9800955A31 /* CLUVersion.m in Sources */ = {isa = PBXBuildFile; fileRef = CF086BDC1B4076A300955A31 /* CLUVersion.m */; };
@@ -125,6 +128,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		CF05758A1B48261E0081ECBC /* CLUHTTPMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUHTTPMessage.h; sourceTree = "<group>"; };
+		CF05758B1B48261E0081ECBC /* CLUHTTPMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUHTTPMessage.m; sourceTree = "<group>"; };
 		CF086BD71B40766700955A31 /* CLUVersion.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CLUVersion.h; sourceTree = "<group>"; };
 		CF086BDC1B4076A300955A31 /* CLUVersion.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CLUVersion.m; sourceTree = "<group>"; };
 		CF086BDF1B40806A00955A31 /* CLUVersionTests.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = CLUVersionTests.m; sourceTree = "<group>"; };
@@ -345,6 +350,8 @@
 		CF136C2C1B4007A70037FFA8 /* CLUUserAgentTests */ = {
 			isa = PBXGroup;
 			children = (
+				CF05758A1B48261E0081ECBC /* CLUHTTPMessage.h */,
+				CF05758B1B48261E0081ECBC /* CLUHTTPMessage.m */,
 				CF136C2D1B4007A70037FFA8 /* CLUTestServer.h */,
 				CF136C2E1B4007A70037FFA8 /* CLUTestServer.m */,
 				CF136C2F1B4007A70037FFA8 /* CLUUserAgentTests.m */,
@@ -680,6 +687,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF05758C1B48261E0081ECBC /* CLUHTTPMessage.m in Sources */,
 				CF086BE01B40806A00955A31 /* CLUVersionTests.m in Sources */,
 				CF136C321B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */,
 				CF136C301B4007A70037FFA8 /* CLUTestServer.m in Sources */,
@@ -690,6 +698,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF05758E1B48261E0081ECBC /* CLUHTTPMessage.m in Sources */,
 				CF136BE51B4003CE0037FFA8 /* main.m in Sources */,
 				CF136BE31B4003CE0037FFA8 /* AppDelegate.m in Sources */,
 				CF136C361B400F3E0037FFA8 /* CLUTestServer.m in Sources */,
@@ -712,6 +721,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CF05758D1B48261E0081ECBC /* CLUHTTPMessage.m in Sources */,
 				CF086BE11B40806A00955A31 /* CLUVersionTests.m in Sources */,
 				CF136C331B4007A70037FFA8 /* CLUUserAgentTests.m in Sources */,
 				CF136C351B400F3C0037FFA8 /* CLUTestServer.m in Sources */,

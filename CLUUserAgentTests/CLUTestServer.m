@@ -13,16 +13,7 @@
 @import Darwin.POSIX.netinet.in; // struct sockaddr_in6
 @import Darwin.POSIX.sys.socket; // socket()
 
-// TODO: When porting to Swift, these can become a String-based enumeration.
-static NSString* const kHTTPHeaderNameContentLength = @"Content-Length";
-static NSString* const kHTTPHeaderNameUserAgent = @"User-Agent";
-/* TODO: When porting to Swift, this can become an enum:
- * enum HTTPStatus : (Int, String) {
- *   case OK(200, "OK")
- * }
- */
-static CFIndex const kHTTPStatusCodeOK = 200;
-static NSDictionary* kHTTPStatusMessages = nil;
+#import "CLUHTTPMessage.h"
 
 // A simple wrapper around NSFileHandle implementing NSCopying
 @interface CLUTestServerSocket : NSObject<NSCopying>
@@ -30,17 +21,6 @@ static NSDictionary* kHTTPStatusMessages = nil;
 @end
 
 @implementation CLUTestServerSocket
-
-+ (void)initialize
-{
-    static dispatch_once_t onceToken;
-    
-    [super initialize];
-    
-    dispatch_once(&onceToken, ^{
-        kHTTPStatusMessages = @{@(kHTTPStatusCodeOK): @"OK"};
-    });
-}
 
 + (instancetype) socketWithFileHandle:(NSFileHandle*)fileHandle
 {
@@ -90,7 +70,7 @@ static NSDictionary* kHTTPStatusMessages = nil;
     }
 }
 
-- (NSURL*) listenAndReturnError:(NSError*__autoreleasing __nullable *__nonnull)error
+- (nullable NSURL *)listenAndReturnError:(NSError * __nullable __autoreleasing * __nullable)error
 {
     int fd = 0;
     int status = 0;
@@ -281,7 +261,7 @@ static NSDictionary* kHTTPStatusMessages = nil;
     CFIndex statusCode = kHTTPStatusCodeOK;
     CFHTTPMessageRef response = CFHTTPMessageCreateResponse(kCFAllocatorDefault,
                                                             statusCode,
-                                                            (__bridge CFStringRef)kHTTPStatusMessages[@(statusCode)],
+                                                            (__bridge CFStringRef)[CLUHTTPMessage statusMessageForCode:statusCode],
                                                             (__bridge CFStringRef)httpVersion);
     NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:userAgent.length];
     CFHTTPMessageSetHeaderFieldValue(response,
