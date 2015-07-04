@@ -33,7 +33,7 @@ extern NSString* const kHTTPVersion1_1;
 
 @property (readonly) NSDictionary* allHTTPHeaderFields; // NSDictionary<NSString*,NSString*>*
 @property (getter=isHeaderComplete, readonly) BOOL headerComplete;
-@property (readonly) NSData* HTTPBody;
+@property NSData* HTTPBody;
 @property (readonly) NSString* HTTPMethod;
 @property (readonly) NSString* HTTPVersion;
 @property (readonly) CFHTTPMessageRef underlyingMessage;

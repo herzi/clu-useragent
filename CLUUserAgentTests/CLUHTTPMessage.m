@@ -149,6 +149,11 @@ NS_ASSUME_NONNULL_END
 
 #warning FIXME: Move this into CLUMutableHTTPMessage
 
+- (void)setHTTPBody:(nonnull NSData*)HTTPBody
+{
+    CFHTTPMessageSetBody(self.underlyingMessage, (__bridge CFDataRef)HTTPBody);
+}
+
 - (void) setValue:(nonnull NSString*)value forHTTPHeaderField:(nonnull NSString*)field
 {
     CFHTTPMessageSetHeaderFieldValue(self.underlyingMessage,

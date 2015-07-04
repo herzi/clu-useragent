@@ -270,7 +270,7 @@
     [response setValue:contentLength.stringValue forHTTPHeaderField:kHTTPHeaderNameContentLength];
 #warning FIXME: Set a Content-Type header: text/plain; charset=UTF-8
 #warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
-    CFHTTPMessageSetBody(response.underlyingMessage, (__bridge CFDataRef)responseBody);
+    response.HTTPBody = responseBody;
     NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response.underlyingMessage);
     [connection writeData:responseData];
     [connection closeFile];
