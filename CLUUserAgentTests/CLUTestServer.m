@@ -271,8 +271,7 @@
 #warning FIXME: Set a Content-Type header: text/plain; charset=UTF-8
 #warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
     response.HTTPBody = responseBody;
-    NSData* responseData = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(response.underlyingMessage);
-    [connection writeData:responseData];
+    [connection writeData:[response serializedData]];
     [connection closeFile];
     
 #warning FIXME: Check the specifications whether this is correct, then implement the correct way: HTTP 1.0 defaults to "close" and 1.1 to "keep-alive"?

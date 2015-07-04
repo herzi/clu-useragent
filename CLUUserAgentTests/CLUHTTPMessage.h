@@ -40,6 +40,7 @@ extern NSString* const kHTTPVersion1_1;
 @property (readonly) NSURL* URL;
 
 - (NSRange) rangeOfAppendedDataFrom:(NSData*)data;
+- (NSData*) serializedData;
 - (void) setValue:(NSString*)value forHTTPHeaderField:(NSString*)field;
 
 @end

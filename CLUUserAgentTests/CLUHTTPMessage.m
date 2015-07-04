@@ -138,6 +138,13 @@ NS_ASSUME_NONNULL_END
     return CFHTTPMessageIsHeaderComplete(self.underlyingMessage);
 }
 
+- (nonnull NSData*)serializedData
+{
+    NSData* result = (__bridge_transfer NSData*)CFHTTPMessageCopySerializedMessage(self.underlyingMessage);
+    NSAssert(result, nil);
+    return result;
+}
+
 - (nonnull NSURL*)URL
 {
     NSURL* result = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(self.underlyingMessage);
