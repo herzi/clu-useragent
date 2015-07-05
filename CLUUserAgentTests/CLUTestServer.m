@@ -241,35 +241,43 @@
         @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Persist the request and wait for more data.)" userInfo:nil];
     }
     
+    CLUHTTPMessage* response;
     if (![kHTTPMethodGet isEqualToString:request.HTTPMethod]) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “405 Method Not Allowed”.)" userInfo:nil];
+        NSString* message = [NSString stringWithFormat:@"Method not allowed: “%@” (expected: “%@”)", request.HTTPMethod, kHTTPMethodGet];
+        response = [CLUHTTPMessage responseWithStatusCode:kHTTPStatusCodeMethodNotAllowed HTTPVersion:request.HTTPVersion];
+        response.HTTPBody = [message dataUsingEncoding:NSUTF8StringEncoding];
     }
     
     if (!request.HTTPBody || 0 < request.HTTPBody.length) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request”)" userInfo:nil];
+        response = [CLUHTTPMessage responseWithStatusCode:kHTTPStatusCodeNotFound HTTPVersion:request.HTTPVersion];
+        response.HTTPBody = [@"GET requests should not have a body." dataUsingEncoding:NSUTF8StringEncoding];
     }
     
     if (![@"/" isEqualToString:request.URL.path]) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “404 Not Found”.)" userInfo:nil];
+        NSString* message = [NSString stringWithFormat:@"Resource not found: “%@”", request.URL.path];
+        response = [CLUHTTPMessage responseWithStatusCode:kHTTPStatusCodeNotFound HTTPVersion:request.HTTPVersion];
+        response.HTTPBody = [message dataUsingEncoding:NSUTF8StringEncoding];
     }
     
     NSString* userAgent = request.allHTTPHeaderFields[kHTTPHeaderNameUserAgent];
     if (!userAgent) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “400 Bad Request“, telling the client to send a User-Agent header.)" userInfo:nil];
+        response = [CLUHTTPMessage responseWithStatusCode:kHTTPStatusCodeBadRequest HTTPVersion:request.HTTPVersion];
+        response.HTTPBody = [@"You need to provide a “User-Agent” header." dataUsingEncoding:NSUTF8StringEncoding];
+    } else if (!response) {
+        response = [CLUHTTPMessage responseWithStatusCode:kHTTPStatusCodeOK HTTPVersion:request.HTTPVersion];
+        response.HTTPBody = [userAgent dataUsingEncoding:NSUTF8StringEncoding];
     }
     
     if (![kHTTPVersion1_1 isEqualToString:request.HTTPVersion]) {
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement! (Reply with “505 HTTP Version Not Supported”.)" userInfo:nil];
+        NSString* message = [NSString stringWithFormat:@"Unsupported HTTP version: “%@” (supported: “%@”)", request.HTTPVersion, kHTTPVersion1_1];
+        response = [CLUHTTPMessage responseWithStatusCode:kHTTPStatusCodeHTTPVersionNotSupported HTTPVersion:request.HTTPVersion];
+        response.HTTPBody = [message dataUsingEncoding:NSUTF8StringEncoding];
     }
     
-    CFIndex statusCode = kHTTPStatusCodeOK;
-    CLUHTTPMessage* response = [CLUHTTPMessage responseWithStatusCode:statusCode HTTPVersion:request.HTTPVersion];
-    NSData* responseBody = [userAgent dataUsingEncoding:NSASCIIStringEncoding];
-    NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:responseBody.length];
+    NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:response.HTTPBody.length];
     [response setValue:contentLength.stringValue forHTTPHeaderField:kHTTPHeaderNameContentLength];
-#warning FIXME: Set a Content-Type header: text/plain; charset=UTF-8
-#warning FIXME: Test using a UTF-8 User-Agent (which is not ASCII compatible).
-    response.HTTPBody = responseBody;
+    [response setValue:kMIMETypeUTF8Text forHTTPHeaderField:kHTTPHeaderNameContentType];
+    
     [connection writeData:[response serializedData]];
     [connection closeFile];
     

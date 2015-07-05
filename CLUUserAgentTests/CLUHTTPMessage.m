@@ -11,6 +11,7 @@
 // TODO: When porting to Swift, these can become a String-based enumeration.
 NSString* const kHTTPHeaderNameConnection = @"Connection";
 NSString* const kHTTPHeaderNameContentLength = @"Content-Length";
+NSString* const kHTTPHeaderNameContentType = @"Content-Type";
 NSString* const kHTTPHeaderNameUserAgent = @"User-Agent";
 
 // TODO: When porting to Swift, these can become a String-based enumeration.
@@ -18,14 +19,9 @@ NSString* const kHTTPHeaderValueConnectionKeepAlive = @"keep-alive";
 
 NSString* const kHTTPMethodGet = @"GET";
 
-/* TODO: When porting to Swift, this can become an enum:
- * enum HTTPStatus : (Int, String) {
- *   case OK(200, "OK")
- * }
- */
-NSUInteger const kHTTPStatusCodeOK = 200;
+NSString* const kHTTPVersion1_1 = @"HTTP/1.1"; // FIXME: Add Unit-Test to compare with kCFHTTPVersion1_1.
 
-NSString* const kHTTPVersion1_1 = @"HTTP/1.1";
+NSString* const kMIMETypeUTF8Text = @"text/plain; charset=UTF-8";
 
 static NSDictionary* kHTTPStatusMessages = nil;
 
@@ -45,17 +41,6 @@ NS_ASSUME_NONNULL_END
 #warning FIXME: Take a look at the CFHTTPMessage API and make sure every feature is covered here.
 
 #pragma mark Life Cycle Management
-
-+ (void)initialize
-{
-    static dispatch_once_t onceToken;
-    
-    [super initialize];
-    
-    dispatch_once(&onceToken, ^{
-        kHTTPStatusMessages = @{@(kHTTPStatusCodeOK): @"OK"};
-    });
-}
 
 + (nonnull instancetype)messageForEmptyRequest
 {
@@ -85,6 +70,13 @@ NS_ASSUME_NONNULL_END
     return result;
 }
 
+- (void)dealloc
+{
+    if (self.underlyingMessage) {
+        CFRelease(self.underlyingMessage);
+    }
+}
+
 #pragma mark Inspecting the Message
 
 - (nonnull NSDictionary*) allHTTPHeaderFields
@@ -96,27 +88,28 @@ NS_ASSUME_NONNULL_END
 
 - (nonnull NSData *)HTTPBody
 {
-    NSAssert(self.headerComplete, nil);
-    
-#warning FIXME: Use -[CLUHTTPMessage valueForHTTPHeaderField:] here.
-    NSString* contentLength = (__bridge_transfer NSString*)CFHTTPMessageCopyHeaderFieldValue(self.underlyingMessage, (__bridge CFStringRef)kHTTPHeaderNameContentLength);
-    NSUInteger expected;
-#warning FIXME: Use -[CLUHTTPMessage HTTPMethod] here.
-    NSString* method = (__bridge_transfer NSString*)CFHTTPMessageCopyRequestMethod(self.underlyingMessage);
-    if (contentLength) {
-        expected = contentLength.integerValue;
-#warning FIXME: Use a constant like kHTTPMethodGet here.
-    } else if ([@"GET" isEqualToString:method]) {
-        expected = 0;
-    } else {
-#warning FIXME: Write a unit test using the chunked encoding.
-#warning FIXME: Read the HTTP specifications to check the correct behavior for neither Content-Length nor Transfer-Encoding.
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
-    }
-    
     NSData* result = (__bridge_transfer NSData*)CFHTTPMessageCopyBody(self.underlyingMessage);
     NSAssert(result, nil);
-    NSAssert(result.length >= expected, nil);
+    
+    if (self.messageType == kCLUHTTPMessageTypeRequest) {
+        NSAssert(self.headerComplete, nil);
+        
+#warning FIXME: Use -[CLUHTTPMessage valueForHTTPHeaderField:] here.
+        NSString* contentLength = (__bridge_transfer NSString*)CFHTTPMessageCopyHeaderFieldValue(self.underlyingMessage, (__bridge CFStringRef)kHTTPHeaderNameContentLength);
+        NSUInteger expected;
+#warning FIXME: Use -[CLUHTTPMessage HTTPMethod] here.
+        NSString* method = (__bridge_transfer NSString*)CFHTTPMessageCopyRequestMethod(self.underlyingMessage);
+        if (contentLength) {
+            expected = contentLength.integerValue;
+        } else if ([kHTTPMethodGet isEqualToString:method]) {
+            expected = 0;
+        } else {
+#warning FIXME: Write a unit test using the chunked encoding.
+#warning FIXME: Read the HTTP specifications to check the correct behavior for neither Content-Length nor Transfer-Encoding.
+            @throw [NSException exceptionWithName:@"FIXME" reason:@"Implement!" userInfo:nil];
+        }
+        NSAssert(result.length >= expected, nil);
+    }
     
     return result;
 }
@@ -138,6 +131,11 @@ NS_ASSUME_NONNULL_END
 - (BOOL)isHeaderComplete
 {
     return CFHTTPMessageIsHeaderComplete(self.underlyingMessage);
+}
+
+- (CLUHTTPMessageType)messageType
+{
+    return CFHTTPMessageIsRequest(self.underlyingMessage) ? kCLUHTTPMessageTypeRequest : kCLUHTTPMessageTypeResponse;
 }
 
 - (nonnull NSData*)serializedData
@@ -219,16 +217,26 @@ NS_ASSUME_NONNULL_END
 
 #pragma mark HTTP Utilities
 
-+ (nonnull NSString *)statusMessageForCode:(NSUInteger)statusCode
++ (nonnull NSString *)statusMessageForCode:(HTTPStatusCode)statusCode
 {
-    NSString* result = kHTTPStatusMessages[@(statusCode)];
-    
-    if (!result) {
-        // FIXME: Throw a proper exception. However, always throw an exception in this case.
-        @throw [NSException exceptionWithName:@"FIXME" reason:@"Provide a better exception here." userInfo:nil];
+    switch (statusCode) {
+            
+        case kHTTPStatusCodeOK: // 200
+            return @"OK";
+            
+        case kHTTPStatusCodeBadRequest: // 400
+            return @"Bad Request";
+            
+        case kHTTPStatusCodeNotFound: // 404
+            return @"Not Found";
+            
+        case kHTTPStatusCodeMethodNotAllowed: // 405
+            return @"Method Not Allowed";
+            
+        case kHTTPStatusCodeHTTPVersionNotSupported: // 505
+            return @"HTTP Version Not Supported";
+            
     }
-    
-    return result;
 }
 
 @end
