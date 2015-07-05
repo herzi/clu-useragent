@@ -94,14 +94,11 @@ NS_ASSUME_NONNULL_END
     if (self.messageType == kCLUHTTPMessageTypeRequest) {
         NSAssert(self.headerComplete, nil);
         
-#warning FIXME: Use -[CLUHTTPMessage valueForHTTPHeaderField:] here.
-        NSString* contentLength = (__bridge_transfer NSString*)CFHTTPMessageCopyHeaderFieldValue(self.underlyingMessage, (__bridge CFStringRef)kHTTPHeaderNameContentLength);
+        NSString* contentLength = [self valueForHTTPHeaderField:kHTTPHeaderNameContentLength];
         NSUInteger expected;
-#warning FIXME: Use -[CLUHTTPMessage HTTPMethod] here.
-        NSString* method = (__bridge_transfer NSString*)CFHTTPMessageCopyRequestMethod(self.underlyingMessage);
         if (contentLength) {
             expected = contentLength.integerValue;
-        } else if ([kHTTPMethodGet isEqualToString:method]) {
+        } else if ([kHTTPMethodGet isEqualToString:self.HTTPMethod]) {
             expected = 0;
         } else {
 #warning FIXME: Write a unit test using the chunked encoding.
@@ -150,6 +147,12 @@ NS_ASSUME_NONNULL_END
     NSURL* result = (__bridge_transfer NSURL*)CFHTTPMessageCopyRequestURL(self.underlyingMessage);
     NSAssert(result, nil);
     return result;
+}
+
+- (nullable NSString*) valueForHTTPHeaderField:(nonnull NSString*)headerField
+{
+    return (__bridge_transfer NSString*)CFHTTPMessageCopyHeaderFieldValue(self.underlyingMessage,
+                                                                          (__bridge CFStringRef)headerField);
 }
 
 #pragma mark Mutation

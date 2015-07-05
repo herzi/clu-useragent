@@ -67,6 +67,7 @@ extern NSString* const kMIMETypeUTF8Text;
 - (NSRange) rangeOfAppendedDataFrom:(NSData*)data;
 - (NSData*) serializedData;
 - (void) setValue:(NSString*)value forHTTPHeaderField:(NSString*)field;
+- (nullable NSString*) valueForHTTPHeaderField:(NSString*)headerField;
 
 @end
 

@@ -274,6 +274,7 @@
         response.HTTPBody = [message dataUsingEncoding:NSUTF8StringEncoding];
     }
     
+#warning FIXME: See if we can set Content-Length automatically.
     NSNumber* contentLength = [NSNumber numberWithUnsignedInteger:response.HTTPBody.length];
     [response setValue:contentLength.stringValue forHTTPHeaderField:kHTTPHeaderNameContentLength];
     [response setValue:kMIMETypeUTF8Text forHTTPHeaderField:kHTTPHeaderNameContentType];
