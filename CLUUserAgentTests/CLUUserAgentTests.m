@@ -254,7 +254,7 @@ typedef CancellationBlock __nonnull (^ExecutionBlock)(NSURL* __nonnull url, Comp
     };
     void (^cancel) () = block(testURL, completion);
     
-    [self waitForExpectationsWithTimeout:0.5 handler:^(NSError *error) {
+    [self waitForExpectationsWithTimeout:10.0 handler:^(NSError *error) {
         XCTAssertNil(error);
         
         // FIXME: Consider -[NSError matchesDomain:code:] for these cases.
